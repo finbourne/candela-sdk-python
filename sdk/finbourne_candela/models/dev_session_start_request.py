@@ -22,6 +22,7 @@ from pydantic.v1 import BaseModel, Field, StrictStr
 from finbourne_candela.models.circuit import Circuit
 from finbourne_candela.models.directive import Directive
 from finbourne_candela.models.object_id import ObjectId
+from finbourne_candela.models.tool_module import ToolModule
 
 class DevSessionStartRequest(BaseModel):
     """
@@ -32,8 +33,9 @@ class DevSessionStartRequest(BaseModel):
     directive: Directive = Field(...)
     scope: Optional[StrictStr] = None
     parent_session: Optional[ObjectId] = None
+    tool_module_override: Optional[ToolModule] = None
     additional_properties: Dict[str, Any] = {}
-    __properties = ["model_id", "circuit", "directive", "scope", "parent_session"]
+    __properties = ["model_id", "circuit", "directive", "scope", "parent_session", "tool_module_override"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +82,9 @@ class DevSessionStartRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of parent_session
         if self.parent_session:
             _dict['parent_session'] = self.parent_session.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of tool_module_override
+        if self.tool_module_override:
+            _dict['tool_module_override'] = self.tool_module_override.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -94,6 +99,11 @@ class DevSessionStartRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.parent_session is None and "parent_session" in self.__fields_set__:
             _dict['parent_session'] = None
+
+        # set to None if tool_module_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tool_module_override is None and "tool_module_override" in self.__fields_set__:
+            _dict['tool_module_override'] = None
 
         return _dict
 
@@ -111,7 +121,8 @@ class DevSessionStartRequest(BaseModel):
             "circuit": Circuit.from_dict(obj.get("circuit")) if obj.get("circuit") is not None else None,
             "directive": Directive.from_dict(obj.get("directive")) if obj.get("directive") is not None else None,
             "scope": obj.get("scope"),
-            "parent_session": ObjectId.from_dict(obj.get("parent_session")) if obj.get("parent_session") is not None else None
+            "parent_session": ObjectId.from_dict(obj.get("parent_session")) if obj.get("parent_session") is not None else None,
+            "tool_module_override": ToolModule.from_dict(obj.get("tool_module_override")) if obj.get("tool_module_override") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

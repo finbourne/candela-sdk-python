@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **directive** | [**Directive**](Directive.md) |  | 
 **scope** | **str** |  | [optional] 
 **parent_session** | [**ObjectId**](ObjectId.md) |  | [optional] 
+**tool_module_override** | [**ToolModule**](ToolModule.md) |  | [optional] 
 
 ## Example
 

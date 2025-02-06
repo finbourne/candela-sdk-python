@@ -34,8 +34,9 @@ class SlotData(BaseModel):
     created: Optional[datetime] = None
     assigned: Optional[datetime] = None
     disposed: Optional[datetime] = None
+    ready: Optional[datetime] = None
     additional_properties: Dict[str, Any] = {}
-    __properties = ["slot_id", "slot_type", "domain", "state", "assigned_to", "url", "created", "assigned", "disposed"]
+    __properties = ["slot_id", "slot_type", "domain", "state", "assigned_to", "url", "created", "assigned", "disposed", "ready"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,6 +101,11 @@ class SlotData(BaseModel):
         if self.disposed is None and "disposed" in self.__fields_set__:
             _dict['disposed'] = None
 
+        # set to None if ready (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ready is None and "ready" in self.__fields_set__:
+            _dict['ready'] = None
+
         return _dict
 
     @classmethod
@@ -120,7 +126,8 @@ class SlotData(BaseModel):
             "url": obj.get("url"),
             "created": obj.get("created"),
             "assigned": obj.get("assigned"),
-            "disposed": obj.get("disposed")
+            "disposed": obj.get("disposed"),
+            "ready": obj.get("ready")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

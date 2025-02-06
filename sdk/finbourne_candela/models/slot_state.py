@@ -36,6 +36,7 @@ class SlotState(int, Enum):
     NUMBER_5 = 5
     NUMBER_6 = 6
     NUMBER_7 = 7
+    NUMBER_8 = 8
 
     @classmethod
     def from_json(cls, json_str: str) -> SlotState:

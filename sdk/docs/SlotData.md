@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **created** | **datetime** |  | [optional] 
 **assigned** | **datetime** |  | [optional] 
 **disposed** | **datetime** |  | [optional] 
+**ready** | **datetime** |  | [optional] 
 
 ## Example
 
