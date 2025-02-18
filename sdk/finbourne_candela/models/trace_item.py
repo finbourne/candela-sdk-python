@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class TraceItem(BaseModel):
     """
     TraceItem
     """
-    item_type: StrictStr = Field(...)
-    content: StrictStr = Field(...)
+    item_type:  StrictStr = Field(...,alias="item_type") 
+    content:  StrictStr = Field(...,alias="content") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["item_type", "content"]
 

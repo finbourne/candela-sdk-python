@@ -18,17 +18,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class NoOp(BaseModel):
     """
     Class representing a no-op op state. This is used to represent cases in switching logic and joining branching states back together.  # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     as_block: Optional[StrictBool] = False
-    child_id: Optional[StrictStr] = None
-    label: StrictStr = Field(...)
+    child_id:  Optional[StrictStr] = Field(None,alias="child_id") 
+    label:  StrictStr = Field(...,alias="label") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["node_id", "node_type", "as_block", "child_id", "label"]
 

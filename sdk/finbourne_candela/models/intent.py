@@ -18,19 +18,19 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 from finbourne_candela.models.spec import Spec
 
 class Intent(BaseModel):
     """
     Class representing an intent state. Intent states construct a json with a defined structure that depends on prior dialogue content.  # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     as_block: Optional[StrictBool] = True
-    child_id: Optional[StrictStr] = None
+    child_id:  Optional[StrictStr] = Field(None,alias="child_id") 
     spec: Spec = Field(...)
-    instruction: Optional[StrictStr] = None
+    instruction:  Optional[StrictStr] = Field(None,alias="instruction") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["node_id", "node_type", "as_block", "child_id", "spec", "instruction"]
 

@@ -18,19 +18,19 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from finbourne_candela.models.slot_state import SlotState
 
 class SlotData(BaseModel):
     """
     SlotData
     """
-    slot_id: StrictStr = Field(...)
-    slot_type: StrictStr = Field(...)
-    domain: StrictStr = Field(...)
+    slot_id:  StrictStr = Field(...,alias="slot_id") 
+    slot_type:  StrictStr = Field(...,alias="slot_type") 
+    domain:  StrictStr = Field(...,alias="domain") 
     state: Optional[SlotState] = None
-    assigned_to: Optional[StrictStr] = None
-    url: Optional[StrictStr] = None
+    assigned_to:  Optional[StrictStr] = Field(None,alias="assigned_to") 
+    url:  Optional[StrictStr] = Field(None,alias="url") 
     created: Optional[datetime] = None
     assigned: Optional[datetime] = None
     disposed: Optional[datetime] = None

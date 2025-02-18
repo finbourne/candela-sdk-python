@@ -18,15 +18,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class ObjectId(BaseModel):
     """
     ObjectId
     """
-    scope: StrictStr = Field(...)
-    identifier: StrictStr = Field(...)
-    version: Optional[StrictStr] = None
+    scope:  StrictStr = Field(...,alias="scope") 
+    identifier:  StrictStr = Field(...,alias="identifier") 
+    version:  Optional[StrictStr] = Field(None,alias="version") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scope", "identifier", "version"]
 

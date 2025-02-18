@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
 
 class Circuit(BaseModel):
     """
     A class that represents a flow of states (circuits) that constitutes the control flow logic of an agent or pipeline.  # noqa: E501
     """
-    first: Optional[StrictStr] = None
-    current: Optional[StrictStr] = None
+    first:  Optional[StrictStr] = Field(None,alias="first") 
+    current:  Optional[StrictStr] = Field(None,alias="current") 
     nodes: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties = ["first", "current", "nodes"]

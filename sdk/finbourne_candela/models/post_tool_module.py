@@ -18,17 +18,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 from finbourne_candela.models.tool_module import ToolModule
 
 class PostToolModule(BaseModel):
     """
     PostToolModule
     """
-    scope: StrictStr = Field(...)
-    identifier: StrictStr = Field(...)
-    description: Optional[StrictStr] = None
-    version_bump: Optional[StrictStr] = 'patch'
+    scope:  StrictStr = Field(...,alias="scope") 
+    identifier:  StrictStr = Field(...,alias="identifier") 
+    description:  Optional[StrictStr] = Field(None,alias="description") 
+    version_bump:  Optional[StrictStr] = Field(None,alias="version_bump") 
     data: ToolModule = Field(...)
     additional_properties: Dict[str, Any] = {}
     __properties = ["scope", "identifier", "description", "version_bump", "data"]

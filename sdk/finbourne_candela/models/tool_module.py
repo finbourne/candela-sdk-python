@@ -18,13 +18,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class ToolModule(BaseModel):
     """
     ToolModule
     """
-    content: StrictStr = Field(...)
+    content:  StrictStr = Field(...,alias="content") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["content"]
 

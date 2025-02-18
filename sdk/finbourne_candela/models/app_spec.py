@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 from finbourne_candela.models.object_id import ObjectId
 
 class AppSpec(BaseModel):
     """
     AppSpec
     """
-    type: StrictStr = Field(...)
+    type:  StrictStr = Field(...,alias="type") 
     circuit: ObjectId = Field(...)
     directive: ObjectId = Field(...)
     additional_properties: Dict[str, Any] = {}

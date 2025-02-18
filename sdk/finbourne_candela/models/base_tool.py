@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr 
 
 class BaseTool(BaseModel):
     """
     Base class for tools        # noqa: E501
     """
-    tool_type: Optional[StrictStr] = None
-    instruction: Optional[StrictStr] = None
+    tool_type:  Optional[StrictStr] = Field(None,alias="tool_type") 
+    instruction:  Optional[StrictStr] = Field(None,alias="instruction") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["tool_type", "instruction"]
 

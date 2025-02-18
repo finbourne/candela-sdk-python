@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class Switch(BaseModel):
     """
     Class representing a switch state. Switch states allow conditional branching of states so the circuit can branch down multiple paths depending on the prior dialog state.  # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     case_spec: Optional[Any] = Field(...)
     case_objs: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}

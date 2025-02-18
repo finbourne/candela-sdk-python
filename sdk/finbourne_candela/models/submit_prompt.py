@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class SubmitPrompt(BaseModel):
     """
     SubmitPrompt
     """
-    prompt: StrictStr = Field(...)
-    session_id: StrictStr = Field(...)
+    prompt:  StrictStr = Field(...,alias="prompt") 
+    session_id:  StrictStr = Field(...,alias="session_id") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["prompt", "session_id"]
 

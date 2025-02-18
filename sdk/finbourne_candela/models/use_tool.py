@@ -18,18 +18,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 from finbourne_candela.models.tool_obj import ToolObj
 
 class UseTool(BaseModel):
     """
     Class representing a tool use state. Tools are bit of code that take intents and perform an action. This lets circuits call out to external systems or local software.  # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     as_block: Optional[StrictBool] = False
-    child_id: Optional[StrictStr] = None
-    intent_id: StrictStr = Field(...)
+    child_id:  Optional[StrictStr] = Field(None,alias="child_id") 
+    intent_id:  StrictStr = Field(...,alias="intent_id") 
     tool_obj: ToolObj = Field(...)
     additional_properties: Dict[str, Any] = {}
     __properties = ["node_id", "node_type", "as_block", "child_id", "intent_id", "tool_obj"]

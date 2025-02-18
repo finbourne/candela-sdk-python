@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class Event(BaseModel):
     """
     Event
     """
-    event_type: StrictStr = Field(...)
-    content: StrictStr = Field(...)
+    event_type:  StrictStr = Field(...,alias="event_type") 
+    content:  StrictStr = Field(...,alias="content") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["event_type", "content"]
 

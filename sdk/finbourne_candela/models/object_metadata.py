@@ -18,7 +18,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from finbourne_candela.models.object_id import ObjectId
 
 class ObjectMetadata(BaseModel):
@@ -26,10 +26,10 @@ class ObjectMetadata(BaseModel):
     ObjectMetadata
     """
     obj_id: ObjectId = Field(...)
-    domain: StrictStr = Field(...)
-    created_by: StrictStr = Field(...)
+    domain:  StrictStr = Field(...,alias="domain") 
+    created_by:  StrictStr = Field(...,alias="created_by") 
     created_at: datetime = Field(...)
-    description: Optional[StrictStr] = None
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["obj_id", "domain", "created_by", "created_at", "description"]
 

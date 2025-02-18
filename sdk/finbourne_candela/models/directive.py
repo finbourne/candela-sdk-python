@@ -18,13 +18,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictBool, StrictStr 
 
 class Directive(BaseModel):
     """
     Class that encapsulates directive (system prompt) content and its application to the llm dialogue.        # noqa: E501
     """
-    point: Optional[StrictStr] = ' * '
+    point:  Optional[StrictStr] = Field(None,alias="point") 
     hide: Optional[StrictBool] = True
     identity: Optional[Any] = None
     purpose: Optional[Any] = None

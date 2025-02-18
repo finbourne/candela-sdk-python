@@ -18,7 +18,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from finbourne_candela.models.validation_error_loc_inner import ValidationErrorLocInner
 
 class ValidationError(BaseModel):
@@ -26,8 +26,8 @@ class ValidationError(BaseModel):
     ValidationError
     """
     loc: conlist(ValidationErrorLocInner) = Field(...)
-    msg: StrictStr = Field(...)
-    type: StrictStr = Field(...)
+    msg:  StrictStr = Field(...,alias="msg") 
+    type:  StrictStr = Field(...,alias="type") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["loc", "msg", "type"]
 

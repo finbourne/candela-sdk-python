@@ -18,18 +18,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class Response(BaseModel):
     """
     Class representing a response state in a circuit. Response states are normal chat responses that can optionally be constrained to a particular form with a guidance template.  # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     as_block: StrictBool = Field(...)
-    child_id: Optional[StrictStr] = None
-    template: Optional[StrictStr] = Field(...)
-    context: Optional[StrictStr] = Field(...)
+    child_id:  Optional[StrictStr] = Field(None,alias="child_id") 
+    template:  StrictStr = Field(...,alias="template") 
+    context:  StrictStr = Field(...,alias="context") 
     inserts: Optional[Any] = Field(...)
     additional_properties: Dict[str, Any] = {}
     __properties = ["node_id", "node_type", "as_block", "child_id", "template", "context", "inserts"]

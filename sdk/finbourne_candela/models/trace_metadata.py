@@ -18,14 +18,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class TraceMetadata(BaseModel):
     """
     TraceMetadata
     """
-    session_id: StrictStr = Field(...)
-    trace_id: StrictStr = Field(...)
+    session_id:  StrictStr = Field(...,alias="session_id") 
+    trace_id:  StrictStr = Field(...,alias="trace_id") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["session_id", "trace_id"]
 

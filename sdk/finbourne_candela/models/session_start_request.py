@@ -18,7 +18,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from finbourne_candela.models.object_id import ObjectId
 
 class SessionStartRequest(BaseModel):
@@ -27,7 +27,7 @@ class SessionStartRequest(BaseModel):
     """
     app: ObjectId = Field(...)
     model_cfg: ObjectId = Field(...)
-    scope: Optional[StrictStr] = None
+    scope:  Optional[StrictStr] = Field(None,alias="scope") 
     parent_session: Optional[ObjectId] = None
     circuit_override: Optional[ObjectId] = None
     directive_override: Optional[ObjectId] = None

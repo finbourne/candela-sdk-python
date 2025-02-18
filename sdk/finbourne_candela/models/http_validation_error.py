@@ -18,7 +18,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, conlist 
 from finbourne_candela.models.validation_error import ValidationError
 
 class HTTPValidationError(BaseModel):

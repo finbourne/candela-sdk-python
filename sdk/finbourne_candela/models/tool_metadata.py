@@ -18,16 +18,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class ToolMetadata(BaseModel):
     """
     ToolMetadata
     """
-    tool_name: StrictStr = Field(...)
-    scope: StrictStr = Field(...)
-    module_name: StrictStr = Field(...)
-    module_version: StrictStr = Field(...)
+    tool_name:  StrictStr = Field(...,alias="tool_name") 
+    scope:  StrictStr = Field(...,alias="scope") 
+    module_name:  StrictStr = Field(...,alias="module_name") 
+    module_version:  StrictStr = Field(...,alias="module_version") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["tool_name", "scope", "module_name", "module_version"]
 

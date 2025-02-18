@@ -18,18 +18,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr 
 
 class InsertContext(BaseModel):
     """
     A class representing a state that adds some fixed sys context.        # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     as_block: Optional[StrictBool] = False
-    child_id: Optional[StrictStr] = None
-    label: StrictStr = Field(...)
-    context: StrictStr = Field(...)
+    child_id:  Optional[StrictStr] = Field(None,alias="child_id") 
+    label:  StrictStr = Field(...,alias="label") 
+    context:  StrictStr = Field(...,alias="context") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["node_id", "node_type", "as_block", "child_id", "label", "context"]
 

@@ -18,17 +18,17 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist 
 
 class Confirm(BaseModel):
     """
     Class representing a user confirmation state.        # noqa: E501
     """
-    node_id: Optional[StrictStr] = None
-    node_type: Optional[StrictStr] = None
+    node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
+    node_type:  Optional[StrictStr] = Field(None,alias="node_type") 
     as_block: Optional[StrictBool] = False
-    child_id: Optional[StrictStr] = None
-    instruction: Optional[StrictStr] = None
+    child_id:  Optional[StrictStr] = Field(None,alias="child_id") 
+    instruction:  Optional[StrictStr] = Field(None,alias="instruction") 
     options: conlist(StrictStr) = Field(...)
     additional_properties: Dict[str, Any] = {}
     __properties = ["node_id", "node_type", "as_block", "child_id", "instruction", "options"]
