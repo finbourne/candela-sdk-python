@@ -18,7 +18,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, StrictBool, StrictStr 
+from pydantic.v1 import StrictStr, Field, BaseModel, StrictBool, StrictStr, validator 
 
 class Directive(BaseModel):
     """
@@ -33,6 +33,16 @@ class Directive(BaseModel):
     context_vals: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}
     __properties = ["point", "hide", "identity", "purpose", "style", "restriction", "context_vals"]
+
+    @validator('point')
+    def point_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in (' * '):
+            raise ValueError("must be one of enum values (' * ')")
+        return value
 
     class Config:
         """Pydantic configuration"""
