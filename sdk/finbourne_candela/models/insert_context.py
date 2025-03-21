@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictSt
 
 class InsertContext(BaseModel):
     """
-    A class representing a state that adds some fixed sys context.        # noqa: E501
+    A class representing a state that adds some fixed sys context.  # noqa: E501
     """
     node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
     node_type:  Optional[StrictStr] = Field(None,alias="node_type") 

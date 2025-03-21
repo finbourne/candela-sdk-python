@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, StrictBool, StrictStr, vali
 
 class Directive(BaseModel):
     """
-    Class that encapsulates directive (system prompt) content and its application to the llm dialogue.        # noqa: E501
+    Class that encapsulates directive (system prompt) content and its application to the llm dialogue.  # noqa: E501
     """
     point:  Optional[StrictStr] = Field(None,alias="point") 
     hide: Optional[StrictBool] = True

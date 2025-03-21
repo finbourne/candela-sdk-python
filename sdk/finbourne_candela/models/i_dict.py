@@ -23,7 +23,7 @@ from finbourne_candela.models.keys import Keys
 
 class IDict(BaseModel):
     """
-    Class representing a variable-sized dictionary with string-valued keys and items of the same defined type.        # noqa: E501
+    Class representing a variable-sized dictionary with string-valued keys and items of the same defined type.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     obj: Obj = Field(...)

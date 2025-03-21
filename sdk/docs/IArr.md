@@ -1,6 +1,6 @@
 # IArr
 
-Class representing a variable length array intent field with a defined element type.      
+Class representing a variable length array intent field with a defined element type.
 
 ## Properties
 Name | Type | Description | Notes

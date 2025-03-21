@@ -1,6 +1,6 @@
 # InsertContext
 
-A class representing a state that adds some fixed sys context.      
+A class representing a state that adds some fixed sys context.
 
 ## Properties
 Name | Type | Description | Notes

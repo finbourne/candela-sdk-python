@@ -1,6 +1,6 @@
 # BaseTool
 
-Base class for tools      
+Base class for tools
 
 ## Properties
 Name | Type | Description | Notes

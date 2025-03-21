@@ -1,6 +1,6 @@
 # IInt
 
-Class representing an integer-valued field in an intent.      
+Class representing an integer-valued field in an intent.
 
 ## Properties
 Name | Type | Description | Notes

@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel
 
 class IBool(BaseModel):
     """
-    Class representing a boolean-valued field in an intent.        # noqa: E501
+    Class representing a boolean-valued field in an intent.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     additional_properties: Dict[str, Any] = {}

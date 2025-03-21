@@ -23,7 +23,7 @@ from finbourne_candela.models.max_len import MaxLen
 
 class IArr(BaseModel):
     """
-    Class representing a variable length array intent field with a defined element type.        # noqa: E501
+    Class representing a variable length array intent field with a defined element type.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     min_len: Optional[Any] = Field(...)

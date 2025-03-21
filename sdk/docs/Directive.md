@@ -1,6 +1,6 @@
 # Directive
 
-Class that encapsulates directive (system prompt) content and its application to the llm dialogue.      
+Class that encapsulates directive (system prompt) content and its application to the llm dialogue.
 
 ## Properties
 Name | Type | Description | Notes

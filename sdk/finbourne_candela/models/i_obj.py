@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field
 
 class IObj(BaseModel):
     """
-    Class representing a structured object with fixed fields.        # noqa: E501
+    Class representing a structured object with fixed fields.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     fields: Optional[Any] = Field(...)

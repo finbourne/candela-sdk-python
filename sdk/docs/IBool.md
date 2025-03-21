@@ -1,6 +1,6 @@
 # IBool
 
-Class representing a boolean-valued field in an intent.      
+Class representing a boolean-valued field in an intent.
 
 ## Properties
 Name | Type | Description | Notes

@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field
 
 class IReal(BaseModel):
     """
-    Class representing a real (continuous number) valued field in an intent.        # noqa: E501
+    Class representing a real (continuous number) valued field in an intent.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     allow_negative: Optional[Any] = Field(...)

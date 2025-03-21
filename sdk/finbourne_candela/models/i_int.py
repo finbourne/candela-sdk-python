@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field
 
 class IInt(BaseModel):
     """
-    Class representing an integer-valued field in an intent.        # noqa: E501
+    Class representing an integer-valued field in an intent.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     values: Optional[Any] = Field(...)

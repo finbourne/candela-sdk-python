@@ -1,6 +1,6 @@
 # IDict
 
-Class representing a variable-sized dictionary with string-valued keys and items of the same defined type.      
+Class representing a variable-sized dictionary with string-valued keys and items of the same defined type.
 
 ## Properties
 Name | Type | Description | Notes

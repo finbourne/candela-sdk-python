@@ -24,7 +24,7 @@ from finbourne_candela.models.stop import Stop
 
 class IStr(BaseModel):
     """
-    Class representing a string-valued field in an intent.        # noqa: E501
+    Class representing a string-valued field in an intent.  # noqa: E501
     """
     is_nullable: Optional[Any] = None
     max_tokens: Optional[Any] = Field(...)

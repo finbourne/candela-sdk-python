@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, StrictStr
 
 class BaseTool(BaseModel):
     """
-    Base class for tools        # noqa: E501
+    Base class for tools  # noqa: E501
     """
     tool_type:  Optional[StrictStr] = Field(None,alias="tool_type") 
     instruction:  Optional[StrictStr] = Field(None,alias="instruction") 

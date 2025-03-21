@@ -22,7 +22,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictSt
 
 class Confirm(BaseModel):
     """
-    Class representing a user confirmation state.        # noqa: E501
+    Class representing a user confirmation state.  # noqa: E501
     """
     node_id:  Optional[StrictStr] = Field(None,alias="node_id") 
     node_type:  Optional[StrictStr] = Field(None,alias="node_type") 

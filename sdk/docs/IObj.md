@@ -1,6 +1,6 @@
 # IObj
 
-Class representing a structured object with fixed fields.      
+Class representing a structured object with fixed fields.
 
 ## Properties
 Name | Type | Description | Notes

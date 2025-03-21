@@ -1,6 +1,6 @@
 # Confirm
 
-Class representing a user confirmation state.      
+Class representing a user confirmation state.
 
 ## Properties
 Name | Type | Description | Notes

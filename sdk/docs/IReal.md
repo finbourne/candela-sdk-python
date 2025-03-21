@@ -1,6 +1,6 @@
 # IReal
 
-Class representing a real (continuous number) valued field in an intent.      
+Class representing a real (continuous number) valued field in an intent.
 
 ## Properties
 Name | Type | Description | Notes
