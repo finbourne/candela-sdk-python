@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_trace**
-> List[TraceItem] get_trace(session_id, trace_id)
+> Trace get_trace(trace_id, scope)
 
 Get the contents of a trace from Candela.
 
@@ -58,15 +58,15 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TracesApi)
-    session_id = 'session_id_example' # str | 
     trace_id = 'trace_id_example' # str | 
+    scope = 'scope_example' # str | 
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_trace(session_id, trace_id, opts=opts)
+        # api_response =  api_instance.get_trace(trace_id, scope, opts=opts)
 
         # Get the contents of a trace from Candela.
-        api_response = api_instance.get_trace(session_id, trace_id)
+        api_response = api_instance.get_trace(trace_id, scope)
         pprint(api_response)
 
     except ApiException as e:
@@ -79,12 +79,12 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **session_id** | **str**|  | 
  **trace_id** | **str**|  | 
+ **scope** | **str**|  | 
 
 ### Return type
 
-[**List[TraceItem]**](TraceItem.md)
+[**Trace**](Trace.md)
 
 ### HTTP request headers
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_traces**
-> List[TraceMetadata] list_traces(session_id=session_id)
+> List[ObjectMetadata] list_traces()
 
 List all traces available in Candela.
 
@@ -149,14 +149,13 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TracesApi)
-    session_id = 'session_id_example' # str |  (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_traces(session_id=session_id, opts=opts)
+        # api_response =  api_instance.list_traces(opts=opts)
 
         # List all traces available in Candela.
-        api_response = api_instance.list_traces(session_id=session_id)
+        api_response = api_instance.list_traces()
         pprint(api_response)
 
     except ApiException as e:
@@ -166,14 +165,11 @@ main()
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **session_id** | **str**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**List[TraceMetadata]**](TraceMetadata.md)
+[**List[ObjectMetadata]**](ObjectMetadata.md)
 
 ### HTTP request headers
 
@@ -184,7 +180,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

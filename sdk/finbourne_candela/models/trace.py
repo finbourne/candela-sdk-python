@@ -17,17 +17,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from typing import Any, Dict, List
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from finbourne_candela.models.trace_item import TraceItem
 
-class TraceMetadata(BaseModel):
+class Trace(BaseModel):
     """
-    TraceMetadata
+    Trace
     """
-    session_id:  StrictStr = Field(...,alias="session_id") 
-    trace_id:  StrictStr = Field(...,alias="trace_id") 
+    session_ids: conlist(StrictStr) = Field(...)
+    trace_items: conlist(TraceItem) = Field(...)
     additional_properties: Dict[str, Any] = {}
-    __properties = ["session_id", "trace_id"]
+    __properties = ["session_ids", "trace_items"]
 
     class Config:
         """Pydantic configuration"""
@@ -51,8 +52,8 @@ class TraceMetadata(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> TraceMetadata:
-        """Create an instance of TraceMetadata from a JSON string"""
+    def from_json(cls, json_str: str) -> Trace:
+        """Create an instance of Trace from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -62,6 +63,13 @@ class TraceMetadata(BaseModel):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in trace_items (list)
+        _items = []
+        if self.trace_items:
+            for _item in self.trace_items:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['trace_items'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -70,17 +78,17 @@ class TraceMetadata(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> TraceMetadata:
-        """Create an instance of TraceMetadata from a dict"""
+    def from_dict(cls, obj: dict) -> Trace:
+        """Create an instance of Trace from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return TraceMetadata.parse_obj(obj)
+            return Trace.parse_obj(obj)
 
-        _obj = TraceMetadata.parse_obj({
-            "session_id": obj.get("session_id"),
-            "trace_id": obj.get("trace_id")
+        _obj = Trace.parse_obj({
+            "session_ids": obj.get("session_ids"),
+            "trace_items": [TraceItem.from_dict(_item) for _item in obj.get("trace_items")] if obj.get("trace_items") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

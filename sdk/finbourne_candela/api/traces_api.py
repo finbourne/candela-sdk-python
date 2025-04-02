@@ -20,10 +20,10 @@ from typing import overload, Optional, Union, Awaitable
 
 from pydantic.v1 import StrictStr
 
-from typing import List, Optional
+from typing import List
 
-from finbourne_candela.models.trace_item import TraceItem
-from finbourne_candela.models.trace_metadata import TraceMetadata
+from finbourne_candela.models.object_metadata import ObjectMetadata
+from finbourne_candela.models.trace import Trace
 
 from finbourne_candela.api_client import ApiClient
 from finbourne_candela.api_response import ApiResponse
@@ -52,27 +52,27 @@ class TracesApi:
 
 
     @overload
-    async def get_trace(self, session_id : Annotated[StrictStr, Field(...)], trace_id : Annotated[StrictStr, Field(...)], **kwargs) -> List[TraceItem]:  # noqa: E501
+    async def get_trace(self, trace_id : Annotated[StrictStr, Field(...)], scope : Annotated[StrictStr, Field(...)], **kwargs) -> Trace:  # noqa: E501
         ...
 
     @overload
-    def get_trace(self, session_id : Annotated[StrictStr, Field(...)], trace_id : Annotated[StrictStr, Field(...)], async_req: Optional[bool]=True, **kwargs) -> List[TraceItem]:  # noqa: E501
+    def get_trace(self, trace_id : Annotated[StrictStr, Field(...)], scope : Annotated[StrictStr, Field(...)], async_req: Optional[bool]=True, **kwargs) -> Trace:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_trace(self, session_id : Annotated[StrictStr, Field(...)], trace_id : Annotated[StrictStr, Field(...)], async_req: Optional[bool]=None, **kwargs) -> Union[List[TraceItem], Awaitable[List[TraceItem]]]:  # noqa: E501
+    def get_trace(self, trace_id : Annotated[StrictStr, Field(...)], scope : Annotated[StrictStr, Field(...)], async_req: Optional[bool]=None, **kwargs) -> Union[Trace, Awaitable[Trace]]:  # noqa: E501
         """Get the contents of a trace from Candela.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_trace(session_id, trace_id, async_req=True)
+        >>> thread = api.get_trace(trace_id, scope, async_req=True)
         >>> result = thread.get()
 
-        :param session_id: (required)
-        :type session_id: str
         :param trace_id: (required)
         :type trace_id: str
+        :param scope: (required)
+        :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -81,7 +81,7 @@ class TracesApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: List[TraceItem]
+        :rtype: Trace
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -89,22 +89,22 @@ class TracesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_trace_with_http_info(session_id, trace_id, **kwargs)  # noqa: E501
+        return self.get_trace_with_http_info(trace_id, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_trace_with_http_info(self, session_id : Annotated[StrictStr, Field(...)], trace_id : Annotated[StrictStr, Field(...)], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_trace_with_http_info(self, trace_id : Annotated[StrictStr, Field(...)], scope : Annotated[StrictStr, Field(...)], **kwargs) -> ApiResponse:  # noqa: E501
         """Get the contents of a trace from Candela.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_trace_with_http_info(session_id, trace_id, async_req=True)
+        >>> thread = api.get_trace_with_http_info(trace_id, scope, async_req=True)
         >>> result = thread.get()
 
-        :param session_id: (required)
-        :type session_id: str
         :param trace_id: (required)
         :type trace_id: str
+        :param scope: (required)
+        :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -126,14 +126,14 @@ class TracesApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(List[TraceItem], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(Trace, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
 
         _all_params = [
-            'session_id',
-            'trace_id'
+            'trace_id',
+            'scope'
         ]
         _all_params.extend(
             [
@@ -165,11 +165,11 @@ class TracesApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('session_id') is not None:  # noqa: E501
-            _query_params.append(('session_id', _params['session_id']))
-
         if _params.get('trace_id') is not None:  # noqa: E501
             _query_params.append(('trace_id', _params['trace_id']))
+
+        if _params.get('scope') is not None:  # noqa: E501
+            _query_params.append(('scope', _params['scope']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -186,7 +186,7 @@ class TracesApi:
         _auth_settings = ['HTTPBearer']  # noqa: E501
 
         _response_types_map = {
-            '200': "List[TraceItem]",
+            '200': "Trace",
             '422': "HTTPValidationError",
         }
 
@@ -210,25 +210,23 @@ class TracesApi:
 
 
     @overload
-    async def list_traces(self, session_id : Annotated[Optional[StrictStr], Field()] = None, **kwargs) -> List[TraceMetadata]:  # noqa: E501
+    async def list_traces(self, **kwargs) -> List[ObjectMetadata]:  # noqa: E501
         ...
 
     @overload
-    def list_traces(self, session_id : Annotated[Optional[StrictStr], Field()] = None, async_req: Optional[bool]=True, **kwargs) -> List[TraceMetadata]:  # noqa: E501
+    def list_traces(self, async_req: Optional[bool]=True, **kwargs) -> List[ObjectMetadata]:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_traces(self, session_id : Annotated[Optional[StrictStr], Field()] = None, async_req: Optional[bool]=None, **kwargs) -> Union[List[TraceMetadata], Awaitable[List[TraceMetadata]]]:  # noqa: E501
+    def list_traces(self, async_req: Optional[bool]=None, **kwargs) -> Union[List[ObjectMetadata], Awaitable[List[ObjectMetadata]]]:  # noqa: E501
         """List all traces available in Candela.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_traces(session_id, async_req=True)
+        >>> thread = api.list_traces(async_req=True)
         >>> result = thread.get()
 
-        :param session_id:
-        :type session_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -237,7 +235,7 @@ class TracesApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: List[TraceMetadata]
+        :rtype: List[ObjectMetadata]
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -245,20 +243,18 @@ class TracesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_traces_with_http_info(session_id, **kwargs)  # noqa: E501
+        return self.list_traces_with_http_info(**kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_traces_with_http_info(self, session_id : Annotated[Optional[StrictStr], Field()] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_traces_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
         """List all traces available in Candela.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_traces_with_http_info(session_id, async_req=True)
+        >>> thread = api.list_traces_with_http_info(async_req=True)
         >>> result = thread.get()
 
-        :param session_id:
-        :type session_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -280,13 +276,12 @@ class TracesApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(List[TraceMetadata], status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(List[ObjectMetadata], status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
 
         _all_params = [
-            'session_id'
         ]
         _all_params.extend(
             [
@@ -318,9 +313,6 @@ class TracesApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('session_id') is not None:  # noqa: E501
-            _query_params.append(('session_id', _params['session_id']))
-
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -336,8 +328,7 @@ class TracesApi:
         _auth_settings = ['HTTPBearer']  # noqa: E501
 
         _response_types_map = {
-            '200': "List[TraceMetadata]",
-            '422': "HTTPValidationError",
+            '200': "List[ObjectMetadata]",
         }
 
         return self.api_client.call_api(

@@ -80,8 +80,8 @@ from finbourne_candela.models.tool_metadata import ToolMetadata
 from finbourne_candela.models.tool_module import ToolModule
 from finbourne_candela.models.tool_module_metadata import ToolModuleMetadata
 from finbourne_candela.models.tool_obj import ToolObj
+from finbourne_candela.models.trace import Trace
 from finbourne_candela.models.trace_item import TraceItem
-from finbourne_candela.models.trace_metadata import TraceMetadata
 from finbourne_candela.models.use_tool import UseTool
 from finbourne_candela.models.validation_error import ValidationError
 from finbourne_candela.models.validation_error_loc_inner import ValidationErrorLocInner
@@ -154,8 +154,8 @@ __all__ = [
     "ToolModule",
     "ToolModuleMetadata",
     "ToolObj",
+    "Trace",
     "TraceItem",
-    "TraceMetadata",
     "UseTool",
     "ValidationError",
     "ValidationErrorLocInner",
