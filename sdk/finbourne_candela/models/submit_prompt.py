@@ -17,7 +17,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class SubmitPrompt(BaseModel):
@@ -26,8 +26,9 @@ class SubmitPrompt(BaseModel):
     """
     prompt:  StrictStr = Field(...,alias="prompt") 
     session_id:  StrictStr = Field(...,alias="session_id") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["prompt", "session_id"]
+    __properties = ["prompt", "session_id", "scope"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,7 +81,8 @@ class SubmitPrompt(BaseModel):
 
         _obj = SubmitPrompt.parse_obj({
             "prompt": obj.get("prompt"),
-            "session_id": obj.get("session_id")
+            "session_id": obj.get("session_id"),
+            "scope": obj.get("scope") if obj.get("scope") is not None else 'default'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

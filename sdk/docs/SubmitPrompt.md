@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **prompt** | **str** |  | 
 **session_id** | **str** |  | 
+**scope** | **str** |  | [optional] [default to 'default']
 
 ## Example
 
