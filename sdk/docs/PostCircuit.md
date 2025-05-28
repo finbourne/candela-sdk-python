@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **identifier** | **str** |  | 
 **description** | **str** |  | [optional] 
 **version_bump** | **str** |  | [optional] [default to 'patch']
-**data** | [**Circuit**](Circuit.md) |  | 
+**data** | [**CircuitDTO**](CircuitDTO.md) |  | 
 
 ## Example
 

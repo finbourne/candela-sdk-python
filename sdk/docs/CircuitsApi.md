@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_circuit**
-> Circuit get_circuit(scope, identifier, version=version)
+> CircuitDTO get_circuit(scope, identifier, version=version)
 
 Get a given circuit from Candela.
 
@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Circuit**](Circuit.md)
+[**CircuitDTO**](CircuitDTO.md)
 
 ### HTTP request headers
 

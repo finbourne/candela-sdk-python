@@ -19,7 +19,7 @@ import json
 
 from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
-from finbourne_candela.models.circuit import Circuit
+from finbourne_candela.models.circuit_dto import CircuitDTO
 from finbourne_candela.models.directive import Directive
 from finbourne_candela.models.object_id import ObjectId
 from finbourne_candela.models.tool_module import ToolModule
@@ -29,7 +29,7 @@ class DevSessionStartRequest(BaseModel):
     DevSessionStartRequest
     """
     model_id: ObjectId = Field(...)
-    circuit: Circuit = Field(...)
+    circuit: CircuitDTO = Field(...)
     directive: Directive = Field(...)
     scope:  Optional[StrictStr] = Field(None,alias="scope") 
     parent_session: Optional[ObjectId] = None
@@ -118,7 +118,7 @@ class DevSessionStartRequest(BaseModel):
 
         _obj = DevSessionStartRequest.parse_obj({
             "model_id": ObjectId.from_dict(obj.get("model_id")) if obj.get("model_id") is not None else None,
-            "circuit": Circuit.from_dict(obj.get("circuit")) if obj.get("circuit") is not None else None,
+            "circuit": CircuitDTO.from_dict(obj.get("circuit")) if obj.get("circuit") is not None else None,
             "directive": Directive.from_dict(obj.get("directive")) if obj.get("directive") is not None else None,
             "scope": obj.get("scope"),
             "parent_session": ObjectId.from_dict(obj.get("parent_session")) if obj.get("parent_session") is not None else None,

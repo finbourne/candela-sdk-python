@@ -17,47 +17,49 @@ import json
 import pprint
 import re  # noqa: F401
 
-from typing import Optional
+from typing import Any, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
-from finbourne_candela.models.confirm import Confirm
-from finbourne_candela.models.insert_context import InsertContext
-from finbourne_candela.models.intent import Intent
-from finbourne_candela.models.no_op import NoOp
-from finbourne_candela.models.response import Response
-from finbourne_candela.models.switch import Switch
-from finbourne_candela.models.use_tool import UseTool
+from finbourne_candela.models.confirm_dto import ConfirmDTO
+from finbourne_candela.models.insert_context_dto import InsertContextDTO
+from finbourne_candela.models.intent_dto import IntentDTO
+from finbourne_candela.models.no_op_dto import NoOpDTO
+from finbourne_candela.models.response_dto import ResponseDTO
+from finbourne_candela.models.switch_dto import SwitchDTO
+from finbourne_candela.models.use_tool_dto import UseToolDTO
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic.v1 import StrictStr, Field
 
-NODES_ANY_OF_SCHEMAS = ["Confirm", "InsertContext", "Intent", "NoOp", "Response", "Switch", "UseTool"]
+NODES_ONE_OF_SCHEMAS = ["ConfirmDTO", "InsertContextDTO", "IntentDTO", "NoOpDTO", "ResponseDTO", "SwitchDTO", "UseToolDTO"]
 
 class Nodes(BaseModel):
     """
     Nodes
     """
-
-    # data type: Response
-    anyof_schema_1_validator: Optional[Response] = None
-    # data type: Intent
-    anyof_schema_2_validator: Optional[Intent] = None
-    # data type: Confirm
-    anyof_schema_3_validator: Optional[Confirm] = None
-    # data type: UseTool
-    anyof_schema_4_validator: Optional[UseTool] = None
-    # data type: Switch
-    anyof_schema_5_validator: Optional[Switch] = None
-    # data type: InsertContext
-    anyof_schema_6_validator: Optional[InsertContext] = None
-    # data type: NoOp
-    anyof_schema_7_validator: Optional[NoOp] = None
+    # data type: ResponseDTO
+    oneof_schema_1_validator: Optional[ResponseDTO] = None
+    # data type: IntentDTO
+    oneof_schema_2_validator: Optional[IntentDTO] = None
+    # data type: ConfirmDTO
+    oneof_schema_3_validator: Optional[ConfirmDTO] = None
+    # data type: NoOpDTO
+    oneof_schema_4_validator: Optional[NoOpDTO] = None
+    # data type: UseToolDTO
+    oneof_schema_5_validator: Optional[UseToolDTO] = None
+    # data type: SwitchDTO
+    oneof_schema_6_validator: Optional[SwitchDTO] = None
+    # data type: InsertContextDTO
+    oneof_schema_7_validator: Optional[InsertContextDTO] = None
     if TYPE_CHECKING:
-        actual_instance: Union[Confirm, InsertContext, Intent, NoOp, Response, Switch, UseTool]
+        actual_instance: Union[ConfirmDTO, InsertContextDTO, IntentDTO, NoOpDTO, ResponseDTO, SwitchDTO, UseToolDTO]
     else:
         actual_instance: Any
-    any_of_schemas: List[str] = Field(NODES_ANY_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Field(NODES_ONE_OF_SCHEMAS, const=True)
 
     class Config:
         validate_assignment = True
+
+    discriminator_value_class_map = {
+    }
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -70,54 +72,59 @@ class Nodes(BaseModel):
             super().__init__(**kwargs)
 
     @validator('actual_instance')
-    def actual_instance_must_validate_anyof(cls, v):
+    def actual_instance_must_validate_oneof(cls, v):
         instance = Nodes.construct()
         error_messages = []
-        # validate data type: Response
-        if not isinstance(v, Response):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `Response`")
+        match = 0
+        matchclass = ""
+        # validate data type: ResponseDTO
+        if not isinstance(v, ResponseDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ResponseDTO`")
         else:
-            return v
-
-        # validate data type: Intent
-        if not isinstance(v, Intent):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `Intent`")
+            match += 1
+            matchclass = matchclass + " ResponseDTO"
+        # validate data type: IntentDTO
+        if not isinstance(v, IntentDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `IntentDTO`")
         else:
-            return v
-
-        # validate data type: Confirm
-        if not isinstance(v, Confirm):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `Confirm`")
+            match += 1
+            matchclass = matchclass + " IntentDTO"
+        # validate data type: ConfirmDTO
+        if not isinstance(v, ConfirmDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ConfirmDTO`")
         else:
-            return v
-
-        # validate data type: UseTool
-        if not isinstance(v, UseTool):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `UseTool`")
+            match += 1
+            matchclass = matchclass + " ConfirmDTO"
+        # validate data type: NoOpDTO
+        if not isinstance(v, NoOpDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `NoOpDTO`")
         else:
-            return v
-
-        # validate data type: Switch
-        if not isinstance(v, Switch):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `Switch`")
+            match += 1
+            matchclass = matchclass + " NoOpDTO"
+        # validate data type: UseToolDTO
+        if not isinstance(v, UseToolDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `UseToolDTO`")
         else:
-            return v
-
-        # validate data type: InsertContext
-        if not isinstance(v, InsertContext):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `InsertContext`")
+            match += 1
+            matchclass = matchclass + " UseToolDTO"
+        # validate data type: SwitchDTO
+        if not isinstance(v, SwitchDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SwitchDTO`")
         else:
-            return v
-
-        # validate data type: NoOp
-        if not isinstance(v, NoOp):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `NoOp`")
+            match += 1
+            matchclass = matchclass + " SwitchDTO"
+        # validate data type: InsertContextDTO
+        if not isinstance(v, InsertContextDTO):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `InsertContextDTO`")
         else:
-            return v
-
-        if error_messages:
+            match += 1
+            matchclass = matchclass + " InsertContextDTO"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in Nodes with oneOf schemas: ConfirmDTO, InsertContextDTO, IntentDTO, NoOpDTO, ResponseDTO, SwitchDTO, UseToolDTO. Details: Matched classes " + matchclass)
+        elif match == 0:
             # no match
-            raise ValueError("No match found when setting the actual_instance in Nodes with anyOf schemas: Confirm, InsertContext, Intent, NoOp, Response, Switch, UseTool. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Nodes with oneOf schemas: ConfirmDTO, InsertContextDTO, IntentDTO, NoOpDTO, ResponseDTO, SwitchDTO, UseToolDTO. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -130,66 +137,68 @@ class Nodes(BaseModel):
         """Returns the object represented by the json string"""
         instance = Nodes.construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[Response] = None
-        try:
-            instance.actual_instance = Response.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[Intent] = None
-        try:
-            instance.actual_instance = Intent.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_3_validator: Optional[Confirm] = None
-        try:
-            instance.actual_instance = Confirm.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_4_validator: Optional[UseTool] = None
-        try:
-            instance.actual_instance = UseTool.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_5_validator: Optional[Switch] = None
-        try:
-            instance.actual_instance = Switch.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_6_validator: Optional[InsertContext] = None
-        try:
-            instance.actual_instance = InsertContext.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_7_validator: Optional[NoOp] = None
-        try:
-            instance.actual_instance = NoOp.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+        match = 0
+        matchclass = ""
+        
 
-        if error_messages:
+        # deserialize data into ResponseDTO
+        try:
+            instance.actual_instance = ResponseDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " ResponseDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into IntentDTO
+        try:
+            instance.actual_instance = IntentDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " IntentDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into ConfirmDTO
+        try:
+            instance.actual_instance = ConfirmDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " ConfirmDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into NoOpDTO
+        try:
+            instance.actual_instance = NoOpDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " NoOpDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into UseToolDTO
+        try:
+            instance.actual_instance = UseToolDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " UseToolDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into SwitchDTO
+        try:
+            instance.actual_instance = SwitchDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " SwitchDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into InsertContextDTO
+        try:
+            instance.actual_instance = InsertContextDTO.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " InsertContextDTO"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into Nodes with oneOf schemas: ConfirmDTO, InsertContextDTO, IntentDTO, NoOpDTO, ResponseDTO, SwitchDTO, UseToolDTO. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Nodes with anyOf schemas: Confirm, InsertContext, Intent, NoOp, Response, Switch, UseTool. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Nodes with oneOf schemas: ConfirmDTO, InsertContextDTO, IntentDTO, NoOpDTO, ResponseDTO, SwitchDTO, UseToolDTO. Details: " + ", ".join(error_messages))
         else:
             return instance
-
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
-
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
-
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the actual instance"""
@@ -205,10 +214,23 @@ class Nodes(BaseModel):
     def to_dict(self) -> dict:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
-            return "null"
+            return None
 
-        to_json = getattr(self.actual_instance, "to_json", None)
-        if callable(to_json):
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
             return self.actual_instance.to_dict()
         else:
-            return json.dumps(self.actual_instance)
+            # primitive type
+            return self.actual_instance
+
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))

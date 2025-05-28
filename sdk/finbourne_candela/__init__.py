@@ -37,26 +37,26 @@ from finbourne_candela.exceptions import ApiException
 # import models into sdk package
 from finbourne_candela.models.app_spec import AppSpec
 from finbourne_candela.models.base_tool import BaseTool
-from finbourne_candela.models.circuit import Circuit
-from finbourne_candela.models.confirm import Confirm
+from finbourne_candela.models.circuit_dto import CircuitDTO
+from finbourne_candela.models.confirm_dto import ConfirmDTO
+from finbourne_candela.models.dto_arr import DTOArr
+from finbourne_candela.models.dto_bool import DTOBool
+from finbourne_candela.models.dto_const import DTOConst
+from finbourne_candela.models.dto_dict import DTODict
+from finbourne_candela.models.dto_enum import DTOEnum
+from finbourne_candela.models.dto_int import DTOInt
+from finbourne_candela.models.dto_obj import DTOObj
+from finbourne_candela.models.dto_real import DTOReal
+from finbourne_candela.models.dto_str import DTOStr
 from finbourne_candela.models.dev_session_start_request import DevSessionStartRequest
 from finbourne_candela.models.directive import Directive
 from finbourne_candela.models.event import Event
 from finbourne_candela.models.fields import Fields
 from finbourne_candela.models.http_validation_error import HTTPValidationError
-from finbourne_candela.models.i_arr import IArr
-from finbourne_candela.models.i_bool import IBool
-from finbourne_candela.models.i_dict import IDict
-from finbourne_candela.models.i_enum import IEnum
-from finbourne_candela.models.i_int import IInt
-from finbourne_candela.models.i_obj import IObj
-from finbourne_candela.models.i_real import IReal
-from finbourne_candela.models.i_str import IStr
-from finbourne_candela.models.insert_context import InsertContext
-from finbourne_candela.models.intent import Intent
+from finbourne_candela.models.insert_context_dto import InsertContextDTO
+from finbourne_candela.models.intent_dto import IntentDTO
 from finbourne_candela.models.keys import Keys
-from finbourne_candela.models.max_len import MaxLen
-from finbourne_candela.models.no_op import NoOp
+from finbourne_candela.models.no_op_dto import NoOpDTO
 from finbourne_candela.models.nodes import Nodes
 from finbourne_candela.models.obj import Obj
 from finbourne_candela.models.object_id import ObjectId
@@ -65,24 +65,22 @@ from finbourne_candela.models.post_app import PostApp
 from finbourne_candela.models.post_circuit import PostCircuit
 from finbourne_candela.models.post_directive import PostDirective
 from finbourne_candela.models.post_tool_module import PostToolModule
-from finbourne_candela.models.regex import Regex
-from finbourne_candela.models.response import Response
+from finbourne_candela.models.response_dto import ResponseDTO
 from finbourne_candela.models.session import Session
 from finbourne_candela.models.session_start_request import SessionStartRequest
 from finbourne_candela.models.slot_data import SlotData
 from finbourne_candela.models.slot_state import SlotState
 from finbourne_candela.models.slots_put_response import SlotsPutResponse
 from finbourne_candela.models.spec import Spec
-from finbourne_candela.models.stop import Stop
 from finbourne_candela.models.submit_prompt import SubmitPrompt
-from finbourne_candela.models.switch import Switch
+from finbourne_candela.models.switch_dto import SwitchDTO
 from finbourne_candela.models.tool_metadata import ToolMetadata
 from finbourne_candela.models.tool_module import ToolModule
 from finbourne_candela.models.tool_module_metadata import ToolModuleMetadata
 from finbourne_candela.models.tool_obj import ToolObj
 from finbourne_candela.models.trace import Trace
 from finbourne_candela.models.trace_item import TraceItem
-from finbourne_candela.models.use_tool import UseTool
+from finbourne_candela.models.use_tool_dto import UseToolDTO
 from finbourne_candela.models.validation_error import ValidationError
 from finbourne_candela.models.validation_error_loc_inner import ValidationErrorLocInner
 
@@ -111,26 +109,26 @@ __all__ = [
     "UserSlotsApi",
     "AppSpec",
     "BaseTool",
-    "Circuit",
-    "Confirm",
+    "CircuitDTO",
+    "ConfirmDTO",
+    "DTOArr",
+    "DTOBool",
+    "DTOConst",
+    "DTODict",
+    "DTOEnum",
+    "DTOInt",
+    "DTOObj",
+    "DTOReal",
+    "DTOStr",
     "DevSessionStartRequest",
     "Directive",
     "Event",
     "Fields",
     "HTTPValidationError",
-    "IArr",
-    "IBool",
-    "IDict",
-    "IEnum",
-    "IInt",
-    "IObj",
-    "IReal",
-    "IStr",
-    "InsertContext",
-    "Intent",
+    "InsertContextDTO",
+    "IntentDTO",
     "Keys",
-    "MaxLen",
-    "NoOp",
+    "NoOpDTO",
     "Nodes",
     "Obj",
     "ObjectId",
@@ -139,24 +137,22 @@ __all__ = [
     "PostCircuit",
     "PostDirective",
     "PostToolModule",
-    "Regex",
-    "Response",
+    "ResponseDTO",
     "Session",
     "SessionStartRequest",
     "SlotData",
     "SlotState",
     "SlotsPutResponse",
     "Spec",
-    "Stop",
     "SubmitPrompt",
-    "Switch",
+    "SwitchDTO",
     "ToolMetadata",
     "ToolModule",
     "ToolModuleMetadata",
     "ToolObj",
     "Trace",
     "TraceItem",
-    "UseTool",
+    "UseToolDTO",
     "ValidationError",
     "ValidationErrorLocInner",
     "ApiClient",

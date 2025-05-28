@@ -18,23 +18,20 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
-from finbourne_candela.models.circuit_dto import CircuitDTO
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, validator 
 
-class PostCircuit(BaseModel):
+class DTOObj(BaseModel):
     """
-    PostCircuit
+    DTOObj
     """
-    scope:  StrictStr = Field(...,alias="scope") 
-    identifier:  StrictStr = Field(...,alias="identifier") 
-    description:  Optional[StrictStr] = Field(None,alias="description") 
-    version_bump:  Optional[StrictStr] = Field(None,alias="version_bump") 
-    data: CircuitDTO = Field(...)
+    type:  Optional[StrictStr] = Field(None,alias="type") 
+    is_nullable: Optional[StrictBool] = None
+    fields: Optional[Any] = Field(...)
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scope", "identifier", "description", "version_bump", "data"]
+    __properties = ["type", "is_nullable", "fields"]
 
-    @validator('version_bump')
-    def version_bump_validate_enum(cls, value):
+    @validator('type')
+    def type_validate_enum(cls, value):
         """Validates the enum"""
 
         # Finbourne have removed enum validation on all models, except for this use case:
@@ -44,7 +41,7 @@ class PostCircuit(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PostCircuit' not in [ 
+        if 'DTOObj' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -85,14 +82,14 @@ class PostCircuit(BaseModel):
            return value
         
         # Only validate the 'type' property of the class
-        if "version_bump" != "type":
+        if "type" != "type":
             return value
 
         if value is None:
             return value
 
-        if value not in ('major', 'minor', 'patch'):
-            raise ValueError("must be one of enum values ('major', 'minor', 'patch')")
+        if value not in ('object'):
+            raise ValueError("must be one of enum values ('object')")
         return value
 
     class Config:
@@ -117,8 +114,8 @@ class PostCircuit(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PostCircuit:
-        """Create an instance of PostCircuit from a JSON string"""
+    def from_json(cls, json_str: str) -> DTOObj:
+        """Create an instance of DTOObj from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -128,36 +125,35 @@ class PostCircuit(BaseModel):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if description (nullable) is None
+        # set to None if is_nullable (nullable) is None
         # and __fields_set__ contains the field
-        if self.description is None and "description" in self.__fields_set__:
-            _dict['description'] = None
+        if self.is_nullable is None and "is_nullable" in self.__fields_set__:
+            _dict['is_nullable'] = None
+
+        # set to None if fields (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fields is None and "fields" in self.__fields_set__:
+            _dict['fields'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PostCircuit:
-        """Create an instance of PostCircuit from a dict"""
+    def from_dict(cls, obj: dict) -> DTOObj:
+        """Create an instance of DTOObj from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PostCircuit.parse_obj(obj)
+            return DTOObj.parse_obj(obj)
 
-        _obj = PostCircuit.parse_obj({
-            "scope": obj.get("scope"),
-            "identifier": obj.get("identifier"),
-            "description": obj.get("description"),
-            "version_bump": obj.get("version_bump") if obj.get("version_bump") is not None else 'patch',
-            "data": CircuitDTO.from_dict(obj.get("data")) if obj.get("data") is not None else None
+        _obj = DTOObj.parse_obj({
+            "type": obj.get("type") if obj.get("type") is not None else 'object',
+            "is_nullable": obj.get("is_nullable"),
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -4,18 +4,19 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_nullable** | **object** |  | [optional] 
+**type** | **str** |  | [optional] [default to 'array']
+**is_nullable** | **bool** |  | [optional] 
+**min_len** | **int** |  | 
+**max_len** | **int** |  | 
 **obj** | [**Obj**](Obj.md) |  | 
-**keys** | [**Keys**](Keys.md) |  | 
-**min_len** | **object** |  | 
-**max_len** | [**MaxLen**](MaxLen.md) |  | 
 **fields** | [**Dict[str, Fields]**](Fields.md) |  | 
-**options** | **object** |  | 
-**max_tokens** | **object** |  | 
-**regex** | [**Regex**](Regex.md) |  | 
-**stop** | [**Stop**](Stop.md) |  | 
-**allow_negative** | **object** |  | 
-**values** | **object** |  | 
+**options** | **List[str]** |  | 
+**max_tokens** | **int** |  | 
+**regex** | **str** |  | 
+**stop** | **str** |  | 
+**allow_negative** | **bool** |  | [optional] 
+**values** | **List[int]** |  | [optional] 
+**value** | **str** |  | 
 
 ## Example
 

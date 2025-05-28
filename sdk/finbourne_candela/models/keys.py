@@ -17,34 +17,34 @@ import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, Optional
+from typing import Any, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
-from finbourne_candela.models.i_enum import IEnum
-from finbourne_candela.models.i_str import IStr
+from finbourne_candela.models.dto_enum import DTOEnum
+from finbourne_candela.models.dto_str import DTOStr
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic.v1 import StrictStr, Field
 
-KEYS_ANY_OF_SCHEMAS = ["IEnum", "IStr", "object"]
+KEYS_ONE_OF_SCHEMAS = ["DTOEnum", "DTOStr"]
 
 class Keys(BaseModel):
     """
     Keys
     """
-
-    # data type: IStr
-    anyof_schema_1_validator: Optional[IStr] = None
-    # data type: IEnum
-    anyof_schema_2_validator: Optional[IEnum] = None
-    # data type: object
-    anyof_schema_3_validator: Optional[Any] = None
+    # data type: DTOStr
+    oneof_schema_1_validator: Optional[DTOStr] = None
+    # data type: DTOEnum
+    oneof_schema_2_validator: Optional[DTOEnum] = None
     if TYPE_CHECKING:
-        actual_instance: Union[IEnum, IStr, object]
+        actual_instance: Union[DTOEnum, DTOStr]
     else:
         actual_instance: Any
-    any_of_schemas: List[str] = Field(KEYS_ANY_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Field(KEYS_ONE_OF_SCHEMAS, const=True)
 
     class Config:
         validate_assignment = True
+
+    discriminator_value_class_map = {
+    }
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -57,30 +57,29 @@ class Keys(BaseModel):
             super().__init__(**kwargs)
 
     @validator('actual_instance')
-    def actual_instance_must_validate_anyof(cls, v):
+    def actual_instance_must_validate_oneof(cls, v):
         instance = Keys.construct()
         error_messages = []
-        # validate data type: IStr
-        if not isinstance(v, IStr):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IStr`")
+        match = 0
+        matchclass = ""
+        # validate data type: DTOStr
+        if not isinstance(v, DTOStr):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOStr`")
         else:
-            return v
-
-        # validate data type: IEnum
-        if not isinstance(v, IEnum):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IEnum`")
+            match += 1
+            matchclass = matchclass + " DTOStr"
+        # validate data type: DTOEnum
+        if not isinstance(v, DTOEnum):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOEnum`")
         else:
-            return v
-
-        # validate data type: object
-        try:
-            instance.anyof_schema_3_validator = v
-            return v
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        if error_messages:
+            match += 1
+            matchclass = matchclass + " DTOEnum"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in Keys with oneOf schemas: DTOEnum, DTOStr. Details: Matched classes " + matchclass)
+        elif match == 0:
             # no match
-            raise ValueError("No match found when setting the actual_instance in Keys with anyOf schemas: IEnum, IStr, object. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Keys with oneOf schemas: DTOEnum, DTOStr. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -93,45 +92,33 @@ class Keys(BaseModel):
         """Returns the object represented by the json string"""
         instance = Keys.construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[IStr] = None
+        match = 0
+        matchclass = ""
+        
+
+        # deserialize data into DTOStr
         try:
-            instance.actual_instance = IStr.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOStr.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOStr"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[IEnum] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOEnum
         try:
-            instance.actual_instance = IEnum.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # deserialize data into object
-        try:
-            # validation
-            instance.anyof_schema_3_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.anyof_schema_3_validator
-            return instance
+            instance.actual_instance = DTOEnum.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOEnum"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
-        if error_messages:
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into Keys with oneOf schemas: DTOEnum, DTOStr. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Keys with anyOf schemas: IEnum, IStr, object. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Keys with oneOf schemas: DTOEnum, DTOStr. Details: " + ", ".join(error_messages))
         else:
             return instance
-
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
-
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
-
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the actual instance"""
@@ -147,10 +134,23 @@ class Keys(BaseModel):
     def to_dict(self) -> dict:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
-            return "null"
+            return None
 
-        to_json = getattr(self.actual_instance, "to_json", None)
-        if callable(to_json):
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
             return self.actual_instance.to_dict()
         else:
-            return json.dumps(self.actual_instance)
+            # primitive type
+            return self.actual_instance
+
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))

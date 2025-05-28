@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **model_id** | [**ObjectId**](ObjectId.md) |  | 
-**circuit** | [**Circuit**](Circuit.md) |  | 
+**circuit** | [**CircuitDTO**](CircuitDTO.md) |  | 
 **directive** | [**Directive**](Directive.md) |  | 
 **scope** | **str** |  | [optional] 
 **parent_session** | [**ObjectId**](ObjectId.md) |  | [optional] 

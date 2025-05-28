@@ -22,7 +22,7 @@ from pydantic.v1 import StrictBool, StrictStr
 
 from typing import List, Optional
 
-from finbourne_candela.models.circuit import Circuit
+from finbourne_candela.models.circuit_dto import CircuitDTO
 from finbourne_candela.models.object_metadata import ObjectMetadata
 from finbourne_candela.models.post_circuit import PostCircuit
 
@@ -550,15 +550,15 @@ class CircuitsApi:
 
 
     @overload
-    async def get_circuit(self, scope : Annotated[StrictStr, Field(...)], identifier : Annotated[StrictStr, Field(...)], version : Annotated[Optional[StrictStr], Field()] = None, **kwargs) -> Circuit:  # noqa: E501
+    async def get_circuit(self, scope : Annotated[StrictStr, Field(...)], identifier : Annotated[StrictStr, Field(...)], version : Annotated[Optional[StrictStr], Field()] = None, **kwargs) -> CircuitDTO:  # noqa: E501
         ...
 
     @overload
-    def get_circuit(self, scope : Annotated[StrictStr, Field(...)], identifier : Annotated[StrictStr, Field(...)], version : Annotated[Optional[StrictStr], Field()] = None, async_req: Optional[bool]=True, **kwargs) -> Circuit:  # noqa: E501
+    def get_circuit(self, scope : Annotated[StrictStr, Field(...)], identifier : Annotated[StrictStr, Field(...)], version : Annotated[Optional[StrictStr], Field()] = None, async_req: Optional[bool]=True, **kwargs) -> CircuitDTO:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_circuit(self, scope : Annotated[StrictStr, Field(...)], identifier : Annotated[StrictStr, Field(...)], version : Annotated[Optional[StrictStr], Field()] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Circuit, Awaitable[Circuit]]:  # noqa: E501
+    def get_circuit(self, scope : Annotated[StrictStr, Field(...)], identifier : Annotated[StrictStr, Field(...)], version : Annotated[Optional[StrictStr], Field()] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CircuitDTO, Awaitable[CircuitDTO]]:  # noqa: E501
         """Get a given circuit from Candela.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -581,7 +581,7 @@ class CircuitsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: Circuit
+        :rtype: CircuitDTO
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -628,7 +628,7 @@ class CircuitsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(Circuit, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(CircuitDTO, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -692,7 +692,7 @@ class CircuitsApi:
         _auth_settings = ['HTTPBearer']  # noqa: E501
 
         _response_types_map = {
-            '200': "Circuit",
+            '200': "CircuitDTO",
             '422': "HTTPValidationError",
         }
 

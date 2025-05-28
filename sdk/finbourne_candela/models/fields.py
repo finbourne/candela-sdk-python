@@ -17,52 +17,55 @@ import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, Optional
+from typing import Any, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
-from finbourne_candela.models.i_arr import IArr
-from finbourne_candela.models.i_bool import IBool
-from finbourne_candela.models.i_dict import IDict
-from finbourne_candela.models.i_enum import IEnum
-from finbourne_candela.models.i_int import IInt
-from finbourne_candela.models.i_obj import IObj
-from finbourne_candela.models.i_real import IReal
-from finbourne_candela.models.i_str import IStr
+from finbourne_candela.models.dto_arr import DTOArr
+from finbourne_candela.models.dto_bool import DTOBool
+from finbourne_candela.models.dto_const import DTOConst
+from finbourne_candela.models.dto_dict import DTODict
+from finbourne_candela.models.dto_enum import DTOEnum
+from finbourne_candela.models.dto_int import DTOInt
+from finbourne_candela.models.dto_obj import DTOObj
+from finbourne_candela.models.dto_real import DTOReal
+from finbourne_candela.models.dto_str import DTOStr
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic.v1 import StrictStr, Field
 
-FIELDS_ANY_OF_SCHEMAS = ["IArr", "IBool", "IDict", "IEnum", "IInt", "IObj", "IReal", "IStr", "object"]
+FIELDS_ONE_OF_SCHEMAS = ["DTOArr", "DTOBool", "DTOConst", "DTODict", "DTOEnum", "DTOInt", "DTOObj", "DTOReal", "DTOStr"]
 
 class Fields(BaseModel):
     """
     Fields
     """
-
-    # data type: IDict
-    anyof_schema_1_validator: Optional[IDict] = None
-    # data type: IArr
-    anyof_schema_2_validator: Optional[IArr] = None
-    # data type: IObj
-    anyof_schema_3_validator: Optional[IObj] = None
-    # data type: IEnum
-    anyof_schema_4_validator: Optional[IEnum] = None
-    # data type: IStr
-    anyof_schema_5_validator: Optional[IStr] = None
-    # data type: IBool
-    anyof_schema_6_validator: Optional[IBool] = None
-    # data type: IReal
-    anyof_schema_7_validator: Optional[IReal] = None
-    # data type: IInt
-    anyof_schema_8_validator: Optional[IInt] = None
-    # data type: object
-    anyof_schema_9_validator: Optional[Any] = None
+    # data type: DTODict
+    oneof_schema_1_validator: Optional[DTODict] = None
+    # data type: DTOArr
+    oneof_schema_2_validator: Optional[DTOArr] = None
+    # data type: DTOObj
+    oneof_schema_3_validator: Optional[DTOObj] = None
+    # data type: DTOEnum
+    oneof_schema_4_validator: Optional[DTOEnum] = None
+    # data type: DTOStr
+    oneof_schema_5_validator: Optional[DTOStr] = None
+    # data type: DTOBool
+    oneof_schema_6_validator: Optional[DTOBool] = None
+    # data type: DTOReal
+    oneof_schema_7_validator: Optional[DTOReal] = None
+    # data type: DTOInt
+    oneof_schema_8_validator: Optional[DTOInt] = None
+    # data type: DTOConst
+    oneof_schema_9_validator: Optional[DTOConst] = None
     if TYPE_CHECKING:
-        actual_instance: Union[IArr, IBool, IDict, IEnum, IInt, IObj, IReal, IStr, object]
+        actual_instance: Union[DTOArr, DTOBool, DTOConst, DTODict, DTOEnum, DTOInt, DTOObj, DTOReal, DTOStr]
     else:
         actual_instance: Any
-    any_of_schemas: List[str] = Field(FIELDS_ANY_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Field(FIELDS_ONE_OF_SCHEMAS, const=True)
 
     class Config:
         validate_assignment = True
+
+    discriminator_value_class_map = {
+    }
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -75,66 +78,71 @@ class Fields(BaseModel):
             super().__init__(**kwargs)
 
     @validator('actual_instance')
-    def actual_instance_must_validate_anyof(cls, v):
+    def actual_instance_must_validate_oneof(cls, v):
         instance = Fields.construct()
         error_messages = []
-        # validate data type: IDict
-        if not isinstance(v, IDict):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IDict`")
+        match = 0
+        matchclass = ""
+        # validate data type: DTODict
+        if not isinstance(v, DTODict):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTODict`")
         else:
-            return v
-
-        # validate data type: IArr
-        if not isinstance(v, IArr):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IArr`")
+            match += 1
+            matchclass = matchclass + " DTODict"
+        # validate data type: DTOArr
+        if not isinstance(v, DTOArr):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOArr`")
         else:
-            return v
-
-        # validate data type: IObj
-        if not isinstance(v, IObj):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IObj`")
+            match += 1
+            matchclass = matchclass + " DTOArr"
+        # validate data type: DTOObj
+        if not isinstance(v, DTOObj):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOObj`")
         else:
-            return v
-
-        # validate data type: IEnum
-        if not isinstance(v, IEnum):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IEnum`")
+            match += 1
+            matchclass = matchclass + " DTOObj"
+        # validate data type: DTOEnum
+        if not isinstance(v, DTOEnum):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOEnum`")
         else:
-            return v
-
-        # validate data type: IStr
-        if not isinstance(v, IStr):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IStr`")
+            match += 1
+            matchclass = matchclass + " DTOEnum"
+        # validate data type: DTOStr
+        if not isinstance(v, DTOStr):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOStr`")
         else:
-            return v
-
-        # validate data type: IBool
-        if not isinstance(v, IBool):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IBool`")
+            match += 1
+            matchclass = matchclass + " DTOStr"
+        # validate data type: DTOBool
+        if not isinstance(v, DTOBool):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOBool`")
         else:
-            return v
-
-        # validate data type: IReal
-        if not isinstance(v, IReal):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IReal`")
+            match += 1
+            matchclass = matchclass + " DTOBool"
+        # validate data type: DTOReal
+        if not isinstance(v, DTOReal):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOReal`")
         else:
-            return v
-
-        # validate data type: IInt
-        if not isinstance(v, IInt):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `IInt`")
+            match += 1
+            matchclass = matchclass + " DTOReal"
+        # validate data type: DTOInt
+        if not isinstance(v, DTOInt):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOInt`")
         else:
-            return v
-
-        # validate data type: object
-        try:
-            instance.anyof_schema_9_validator = v
-            return v
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        if error_messages:
+            match += 1
+            matchclass = matchclass + " DTOInt"
+        # validate data type: DTOConst
+        if not isinstance(v, DTOConst):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DTOConst`")
+        else:
+            match += 1
+            matchclass = matchclass + " DTOConst"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in Fields with oneOf schemas: DTOArr, DTOBool, DTOConst, DTODict, DTOEnum, DTOInt, DTOObj, DTOReal, DTOStr. Details: Matched classes " + matchclass)
+        elif match == 0:
             # no match
-            raise ValueError("No match found when setting the actual_instance in Fields with anyOf schemas: IArr, IBool, IDict, IEnum, IInt, IObj, IReal, IStr, object. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Fields with oneOf schemas: DTOArr, DTOBool, DTOConst, DTODict, DTOEnum, DTOInt, DTOObj, DTOReal, DTOStr. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -147,81 +155,82 @@ class Fields(BaseModel):
         """Returns the object represented by the json string"""
         instance = Fields.construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[IDict] = None
+        match = 0
+        matchclass = ""
+        
+
+        # deserialize data into DTODict
         try:
-            instance.actual_instance = IDict.from_json(json_str)
-            return instance
+            instance.actual_instance = DTODict.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTODict"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[IArr] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOArr
         try:
-            instance.actual_instance = IArr.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOArr.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOArr"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_3_validator: Optional[IObj] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOObj
         try:
-            instance.actual_instance = IObj.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOObj.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOObj"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_4_validator: Optional[IEnum] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOEnum
         try:
-            instance.actual_instance = IEnum.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOEnum.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOEnum"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_5_validator: Optional[IStr] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOStr
         try:
-            instance.actual_instance = IStr.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOStr.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOStr"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_6_validator: Optional[IBool] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOBool
         try:
-            instance.actual_instance = IBool.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOBool.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOBool"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_7_validator: Optional[IReal] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOReal
         try:
-            instance.actual_instance = IReal.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOReal.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOReal"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_8_validator: Optional[IInt] = None
+            error_messages.append(str(e))
+        # deserialize data into DTOInt
         try:
-            instance.actual_instance = IInt.from_json(json_str)
-            return instance
+            instance.actual_instance = DTOInt.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOInt"
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # deserialize data into object
+            error_messages.append(str(e))
+        # deserialize data into DTOConst
         try:
-            # validation
-            instance.anyof_schema_9_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.anyof_schema_9_validator
-            return instance
+            instance.actual_instance = DTOConst.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " DTOConst"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
-        if error_messages:
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into Fields with oneOf schemas: DTOArr, DTOBool, DTOConst, DTODict, DTOEnum, DTOInt, DTOObj, DTOReal, DTOStr. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Fields with anyOf schemas: IArr, IBool, IDict, IEnum, IInt, IObj, IReal, IStr, object. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Fields with oneOf schemas: DTOArr, DTOBool, DTOConst, DTODict, DTOEnum, DTOInt, DTOObj, DTOReal, DTOStr. Details: " + ", ".join(error_messages))
         else:
             return instance
-
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
-
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
-
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the actual instance"""
@@ -237,10 +246,23 @@ class Fields(BaseModel):
     def to_dict(self) -> dict:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
-            return "null"
+            return None
 
-        to_json = getattr(self.actual_instance, "to_json", None)
-        if callable(to_json):
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
             return self.actual_instance.to_dict()
         else:
-            return json.dumps(self.actual_instance)
+            # primitive type
+            return self.actual_instance
+
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))
