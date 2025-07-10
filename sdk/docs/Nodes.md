@@ -1,42 +1,42 @@
 # Nodes
 
-
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] [default to 'response']
-**node_id** | **str** |  | 
-**child_id** | **str** |  | 
-**as_block** | **bool** |  | 
-**template** | **str** |  | 
-**context** | **str** |  | 
-**inserts** | **Dict[str, str]** |  | 
-**spec** | [**Spec**](Spec.md) |  | 
-**instruction** | **str** |  | [optional] 
-**options** | **List[str]** |  | 
-**label** | **str** |  | 
-**intent_id** | **str** |  | 
-**tool_obj** | [**ToolObj**](ToolObj.md) |  | 
-**case_spec** | **Dict[str, str]** |  | 
-**case_objs** | [**Dict[str, NoOpDTO]**](NoOpDTO.md) |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.nodes import Nodes
+from typing import Any, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Nodes from a JSON string
-nodes_instance = Nodes.from_json(json)
-# print the JSON string representation of the object
-print Nodes.to_json()
+# Example with Nodes 
 
-# convert the object into a dict
-nodes_dict = nodes_instance.to_dict()
-# create an instance of Nodes from a dict
-nodes_form_dict = nodes.from_dict(nodes_dict)
+response_dto_instance = finbourne_candela.models.response_dto.ResponseDTO(
+                        type = 'response', 
+                        node_id = '', 
+                        child_id = '', 
+                        as_block = True, 
+                        template = '', 
+                        context = '', 
+                        inserts = {
+                            'key' : ''
+                            }, )
+
+nodes_instance = Nodes(response_dto_instance)
+
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
+See all compatible oneOf types with Nodes
 
+
+ * [IntentDTO](./IntentDTO.md)
+
+ * [ConfirmDTO](./ConfirmDTO.md)
+
+ * [NoOpDTO](./NoOpDTO.md)
+
+ * [UseToolDTO](./UseToolDTO.md)
+
+ * [SwitchDTO](./SwitchDTO.md)
+
+ * [InsertContextDTO](./InsertContextDTO.md)
+
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

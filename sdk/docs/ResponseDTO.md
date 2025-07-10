@@ -1,6 +1,5 @@
 # ResponseDTO
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,24 @@ Name | Type | Description | Notes
 **template** | **str** |  | 
 **context** | **str** |  | 
 **inserts** | **Dict[str, str]** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.response_dto import ResponseDTO
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ResponseDTO from a JSON string
-response_dto_instance = ResponseDTO.from_json(json)
-# print the JSON string representation of the object
-print ResponseDTO.to_json()
+type: Optional[StrictStr] = "example_type"
+node_id: StrictStr = "example_node_id"
+child_id: StrictStr = "example_child_id"
+as_block: StrictBool = # Replace with your value
+as_block:StrictBool = True
+template: StrictStr = "example_template"
+context: StrictStr = "example_context"
+inserts: Optional[Any] = # Replace with your value
+response_dto_instance = ResponseDTO(type=type, node_id=node_id, child_id=child_id, as_block=as_block, template=template, context=context, inserts=inserts)
 
-# convert the object into a dict
-response_dto_dict = response_dto_instance.to_dict()
-# create an instance of ResponseDTO from a dict
-response_dto_form_dict = response_dto.from_dict(response_dto_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

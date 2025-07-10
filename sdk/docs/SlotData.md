@@ -1,6 +1,5 @@
 # SlotData
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,26 @@ Name | Type | Description | Notes
 **assigned** | **datetime** |  | [optional] 
 **disposed** | **datetime** |  | [optional] 
 **ready** | **datetime** |  | [optional] 
-
 ## Example
 
 ```python
 from finbourne_candela.models.slot_data import SlotData
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr
+from datetime import datetime
+slot_id: StrictStr = "example_slot_id"
+slot_type: StrictStr = "example_slot_type"
+domain: StrictStr = "example_domain"
+state: Optional[SlotState] = None
+assigned_to: Optional[StrictStr] = "example_assigned_to"
+url: Optional[StrictStr] = "example_url"
+created: Optional[datetime] = None
+assigned: Optional[datetime] = None
+disposed: Optional[datetime] = None
+ready: Optional[datetime] = None
+slot_data_instance = SlotData(slot_id=slot_id, slot_type=slot_type, domain=domain, state=state, assigned_to=assigned_to, url=url, created=created, assigned=assigned, disposed=disposed, ready=ready)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SlotData from a JSON string
-slot_data_instance = SlotData.from_json(json)
-# print the JSON string representation of the object
-print SlotData.to_json()
-
-# convert the object into a dict
-slot_data_dict = slot_data_instance.to_dict()
-# create an instance of SlotData from a dict
-slot_data_form_dict = slot_data.from_dict(slot_data_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

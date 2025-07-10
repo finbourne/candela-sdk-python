@@ -1,6 +1,5 @@
 # UseToolDTO
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **child_id** | **str** |  | 
 **intent_id** | **str** |  | 
 **tool_obj** | [**ToolObj**](ToolObj.md) |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.use_tool_dto import UseToolDTO
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UseToolDTO from a JSON string
-use_tool_dto_instance = UseToolDTO.from_json(json)
-# print the JSON string representation of the object
-print UseToolDTO.to_json()
+type: Optional[StrictStr] = "example_type"
+node_id: StrictStr = "example_node_id"
+child_id: StrictStr = "example_child_id"
+intent_id: StrictStr = "example_intent_id"
+tool_obj: ToolObj = # Replace with your value
+use_tool_dto_instance = UseToolDTO(type=type, node_id=node_id, child_id=child_id, intent_id=intent_id, tool_obj=tool_obj)
 
-# convert the object into a dict
-use_tool_dto_dict = use_tool_dto_instance.to_dict()
-# create an instance of UseToolDTO from a dict
-use_tool_dto_form_dict = use_tool_dto.from_dict(use_tool_dto_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

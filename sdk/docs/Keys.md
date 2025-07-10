@@ -1,30 +1,27 @@
 # Keys
 
-
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] [default to 'enum']
-**is_nullable** | **bool** |  | [optional] 
-**options** | **List[str]** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.keys import Keys
+from typing import Any, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Keys from a JSON string
-keys_instance = Keys.from_json(json)
-# print the JSON string representation of the object
-print Keys.to_json()
+# Example with Keys 
 
-# convert the object into a dict
-keys_dict = keys_instance.to_dict()
-# create an instance of Keys from a dict
-keys_form_dict = keys.from_dict(keys_dict)
+dto_str_instance = finbourne_candela.models.dto_str.DTOStr(
+                        is_nullable = True, 
+                        max_tokens = 56, 
+                        regex = '', 
+                        stop = '', )
+
+keys_instance = Keys(dto_str_instance)
+
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
+See all compatible oneOf types with Keys
 
+
+ * [DTOEnum](./DTOEnum.md)
+
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

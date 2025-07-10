@@ -1,40 +1,40 @@
 # Fields
 
-
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] [default to 'array']
-**is_nullable** | **bool** |  | [optional] 
-**min_len** | **int** |  | 
-**max_len** | **int** |  | 
-**obj** | [**Obj**](Obj.md) |  | 
-**fields** | [**Dict[str, Fields]**](Fields.md) |  | 
-**options** | **List[str]** |  | 
-**max_tokens** | **int** |  | 
-**regex** | **str** |  | 
-**stop** | **str** |  | 
-**allow_negative** | **bool** |  | [optional] 
-**values** | **List[int]** |  | [optional] 
-**value** | **str** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.fields import Fields
+from typing import Any, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Fields from a JSON string
-fields_instance = Fields.from_json(json)
-# print the JSON string representation of the object
-print Fields.to_json()
+# Example with Fields 
 
-# convert the object into a dict
-fields_dict = fields_instance.to_dict()
-# create an instance of Fields from a dict
-fields_form_dict = fields.from_dict(fields_dict)
+dto_dict_instance = finbourne_candela.models.dto_dict.DTODict(
+                        is_nullable = True, 
+                        obj = null, 
+                        keys = null, )
+
+fields_instance = Fields(dto_dict_instance)
+
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
+See all compatible oneOf types with Fields
 
+
+ * [DTOArr](./DTOArr.md)
+
+ * [DTOObj](./DTOObj.md)
+
+ * [DTOEnum](./DTOEnum.md)
+
+ * [DTOStr](./DTOStr.md)
+
+ * [DTOBool](./DTOBool.md)
+
+ * [DTOReal](./DTOReal.md)
+
+ * [DTOInt](./DTOInt.md)
+
+ * [DTOConst](./DTOConst.md)
+
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

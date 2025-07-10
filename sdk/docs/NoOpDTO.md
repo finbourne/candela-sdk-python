@@ -1,6 +1,5 @@
 # NoOpDTO
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -8,24 +7,20 @@ Name | Type | Description | Notes
 **node_id** | **str** |  | 
 **child_id** | **str** |  | 
 **label** | **str** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.no_op_dto import NoOpDTO
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of NoOpDTO from a JSON string
-no_op_dto_instance = NoOpDTO.from_json(json)
-# print the JSON string representation of the object
-print NoOpDTO.to_json()
+type: Optional[StrictStr] = "example_type"
+node_id: StrictStr = "example_node_id"
+child_id: StrictStr = "example_child_id"
+label: StrictStr = "example_label"
+no_op_dto_instance = NoOpDTO(type=type, node_id=node_id, child_id=child_id, label=label)
 
-# convert the object into a dict
-no_op_dto_dict = no_op_dto_instance.to_dict()
-# create an instance of NoOpDTO from a dict
-no_op_dto_form_dict = no_op_dto.from_dict(no_op_dto_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

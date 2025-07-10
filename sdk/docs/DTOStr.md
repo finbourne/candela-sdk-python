@@ -1,6 +1,5 @@
 # DTOStr
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,23 @@ Name | Type | Description | Notes
 **max_tokens** | **int** |  | 
 **regex** | **str** |  | 
 **stop** | **str** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.dto_str import DTOStr
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictInt, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DTOStr from a JSON string
-dto_str_instance = DTOStr.from_json(json)
-# print the JSON string representation of the object
-print DTOStr.to_json()
+type: Optional[StrictStr] = "example_type"
+is_nullable: Optional[StrictBool] = None
+is_nullable:Optional[StrictBool] = None
+max_tokens: StrictInt = # Replace with your value
+max_tokens: StrictInt = 42
+regex: StrictStr = "example_regex"
+stop: StrictStr = "example_stop"
+dto_str_instance = DTOStr(type=type, is_nullable=is_nullable, max_tokens=max_tokens, regex=regex, stop=stop)
 
-# convert the object into a dict
-dto_str_dict = dto_str_instance.to_dict()
-# create an instance of DTOStr from a dict
-dto_str_form_dict = dto_str.from_dict(dto_str_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

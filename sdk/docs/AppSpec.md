@@ -1,30 +1,24 @@
 # AppSpec
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
 **circuit** | [**ObjectId**](ObjectId.md) |  | 
 **directive** | [**ObjectId**](ObjectId.md) |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.app_spec import AppSpec
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, StrictStr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of AppSpec from a JSON string
-app_spec_instance = AppSpec.from_json(json)
-# print the JSON string representation of the object
-print AppSpec.to_json()
+type: StrictStr = "example_type"
+circuit: ObjectId = # Replace with your value
+directive: ObjectId = # Replace with your value
+app_spec_instance = AppSpec(type=type, circuit=circuit, directive=directive)
 
-# convert the object into a dict
-app_spec_dict = app_spec_instance.to_dict()
-# create an instance of AppSpec from a dict
-app_spec_form_dict = app_spec.from_dict(app_spec_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

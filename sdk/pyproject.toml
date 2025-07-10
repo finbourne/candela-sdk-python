@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "finbourne-candela-sdk"
-version = "0.1.153"
+version = "0.1.154"
 description = "FINBOURNE Candela Platform Web API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "MIT"

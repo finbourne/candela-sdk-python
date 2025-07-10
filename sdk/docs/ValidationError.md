@@ -1,30 +1,24 @@
 # ValidationError
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **loc** | [**List[ValidationErrorLocInner]**](ValidationErrorLocInner.md) |  | 
 **msg** | **str** |  | 
 **type** | **str** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.validation_error import ValidationError
+from typing import Any, Dict, List
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ValidationError from a JSON string
-validation_error_instance = ValidationError.from_json(json)
-# print the JSON string representation of the object
-print ValidationError.to_json()
+loc: conlist(ValidationErrorLocInner) = # Replace with your value
+msg: StrictStr = "example_msg"
+type: StrictStr = "example_type"
+validation_error_instance = ValidationError(loc=loc, msg=msg, type=type)
 
-# convert the object into a dict
-validation_error_dict = validation_error_instance.to_dict()
-# create an instance of ValidationError from a dict
-validation_error_form_dict = validation_error.from_dict(validation_error_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

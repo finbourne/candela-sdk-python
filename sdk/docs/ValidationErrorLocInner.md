@@ -1,27 +1,18 @@
 # ValidationErrorLocInner
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-
 ## Example
 
 ```python
 from finbourne_candela.models.validation_error_loc_inner import ValidationErrorLocInner
+from typing import Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, ValidationError, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ValidationErrorLocInner from a JSON string
-validation_error_loc_inner_instance = ValidationErrorLocInner.from_json(json)
-# print the JSON string representation of the object
-print ValidationErrorLocInner.to_json()
+validation_error_loc_inner_instance = ValidationErrorLocInner()
 
-# convert the object into a dict
-validation_error_loc_inner_dict = validation_error_loc_inner_instance.to_dict()
-# create an instance of ValidationErrorLocInner from a dict
-validation_error_loc_inner_form_dict = validation_error_loc_inner.from_dict(validation_error_loc_inner_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

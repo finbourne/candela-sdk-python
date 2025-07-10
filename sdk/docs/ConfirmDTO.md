@@ -1,6 +1,5 @@
 # ConfirmDTO
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **child_id** | **str** |  | 
 **instruction** | **str** |  | [optional] 
 **options** | **List[str]** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.confirm_dto import ConfirmDTO
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ConfirmDTO from a JSON string
-confirm_dto_instance = ConfirmDTO.from_json(json)
-# print the JSON string representation of the object
-print ConfirmDTO.to_json()
+type: Optional[StrictStr] = "example_type"
+node_id: StrictStr = "example_node_id"
+child_id: StrictStr = "example_child_id"
+instruction: Optional[StrictStr] = "example_instruction"
+options: conlist(StrictStr) = # Replace with your value
+confirm_dto_instance = ConfirmDTO(type=type, node_id=node_id, child_id=child_id, instruction=instruction, options=options)
 
-# convert the object into a dict
-confirm_dto_dict = confirm_dto_instance.to_dict()
-# create an instance of ConfirmDTO from a dict
-confirm_dto_form_dict = confirm_dto.from_dict(confirm_dto_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

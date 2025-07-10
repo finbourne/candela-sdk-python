@@ -1,6 +1,5 @@
 # ToolModuleMetadata
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,22 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **description** | **str** |  | [optional] 
 **tools** | **List[str]** |  | 
-
 ## Example
 
 ```python
 from finbourne_candela.models.tool_module_metadata import ToolModuleMetadata
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from datetime import datetime
+obj_id: ObjectId = # Replace with your value
+domain: StrictStr = "example_domain"
+created_by: StrictStr = "example_created_by"
+created_at: datetime = # Replace with your value
+description: Optional[StrictStr] = "example_description"
+tools: conlist(StrictStr) = # Replace with your value
+tool_module_metadata_instance = ToolModuleMetadata(obj_id=obj_id, domain=domain, created_by=created_by, created_at=created_at, description=description, tools=tools)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ToolModuleMetadata from a JSON string
-tool_module_metadata_instance = ToolModuleMetadata.from_json(json)
-# print the JSON string representation of the object
-print ToolModuleMetadata.to_json()
-
-# convert the object into a dict
-tool_module_metadata_dict = tool_module_metadata_instance.to_dict()
-# create an instance of ToolModuleMetadata from a dict
-tool_module_metadata_form_dict = tool_module_metadata.from_dict(tool_module_metadata_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
