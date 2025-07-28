@@ -25,11 +25,17 @@ class DTOInt(BaseModel):
     DTOInt
     """
     type:  Optional[StrictStr] = Field(None,alias="type") 
-    is_nullable: Optional[StrictBool] = None
     values: Optional[conlist(StrictInt)] = None
+    is_nullable: Optional[StrictBool] = None
+    description:  Optional[StrictStr] = Field(None,alias="description") 
+    default_value: Optional[StrictInt] = None
+    min_value: Optional[StrictInt] = None
+    max_value: Optional[StrictInt] = None
+    lower_bound:  Optional[StrictStr] = Field(None,alias="lower_bound") 
+    upper_bound:  Optional[StrictStr] = Field(None,alias="upper_bound") 
     allow_negative: Optional[StrictBool] = None
     additional_properties: Dict[str, Any] = {}
-    __properties = ["type", "is_nullable", "values", "allow_negative"]
+    __properties = ["type", "values", "is_nullable", "description", "default_value", "min_value", "max_value", "lower_bound", "upper_bound", "allow_negative"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -93,6 +99,130 @@ class DTOInt(BaseModel):
             raise ValueError("must be one of enum values ('int')")
         return value
 
+    @validator('lower_bound')
+    def lower_bound_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'DTOInt' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "lower_bound" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ('inclusive', 'exclusive'):
+            raise ValueError("must be one of enum values ('inclusive', 'exclusive')")
+        return value
+
+    @validator('upper_bound')
+    def upper_bound_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'DTOInt' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "upper_bound" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ('inclusive', 'exclusive'):
+            raise ValueError("must be one of enum values ('inclusive', 'exclusive')")
+        return value
+
     class Config:
         """Pydantic configuration"""
         allow_population_by_field_name = True
@@ -136,6 +266,36 @@ class DTOInt(BaseModel):
         if self.is_nullable is None and "is_nullable" in self.__fields_set__:
             _dict['is_nullable'] = None
 
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if default_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.default_value is None and "default_value" in self.__fields_set__:
+            _dict['default_value'] = None
+
+        # set to None if min_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.min_value is None and "min_value" in self.__fields_set__:
+            _dict['min_value'] = None
+
+        # set to None if max_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.max_value is None and "max_value" in self.__fields_set__:
+            _dict['max_value'] = None
+
+        # set to None if lower_bound (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lower_bound is None and "lower_bound" in self.__fields_set__:
+            _dict['lower_bound'] = None
+
+        # set to None if upper_bound (nullable) is None
+        # and __fields_set__ contains the field
+        if self.upper_bound is None and "upper_bound" in self.__fields_set__:
+            _dict['upper_bound'] = None
+
         # set to None if allow_negative (nullable) is None
         # and __fields_set__ contains the field
         if self.allow_negative is None and "allow_negative" in self.__fields_set__:
@@ -154,8 +314,14 @@ class DTOInt(BaseModel):
 
         _obj = DTOInt.parse_obj({
             "type": obj.get("type") if obj.get("type") is not None else 'int',
-            "is_nullable": obj.get("is_nullable"),
             "values": obj.get("values"),
+            "is_nullable": obj.get("is_nullable"),
+            "description": obj.get("description"),
+            "default_value": obj.get("default_value"),
+            "min_value": obj.get("min_value"),
+            "max_value": obj.get("max_value"),
+            "lower_bound": obj.get("lower_bound"),
+            "upper_bound": obj.get("upper_bound"),
             "allow_negative": obj.get("allow_negative")
         })
         # store additional fields in additional_properties

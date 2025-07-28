@@ -4,8 +4,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | [optional] [default to 'enum']
-**is_nullable** | **bool** |  | [optional] 
 **options** | **List[str]** |  | 
+**is_nullable** | **bool** |  | [optional] 
+**description** | **str** |  | [optional] 
+**default_value** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -14,10 +16,12 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, validator
 
 type: Optional[StrictStr] = "example_type"
+options: conlist(StrictStr) = # Replace with your value
 is_nullable: Optional[StrictBool] = None
 is_nullable:Optional[StrictBool] = None
-options: conlist(StrictStr) = # Replace with your value
-dto_enum_instance = DTOEnum(type=type, is_nullable=is_nullable, options=options)
+description: Optional[StrictStr] = "example_description"
+default_value: Optional[StrictStr] = "example_default_value"
+dto_enum_instance = DTOEnum(type=type, options=options, is_nullable=is_nullable, description=description, default_value=default_value)
 
 ```
 

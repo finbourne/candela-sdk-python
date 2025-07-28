@@ -18,7 +18,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, validator 
 
 class SwitchDTO(BaseModel):
     """
@@ -28,8 +28,9 @@ class SwitchDTO(BaseModel):
     node_id:  StrictStr = Field(...,alias="node_id") 
     case_spec: Optional[Any] = Field(...)
     case_objs: Optional[Any] = Field(...)
+    isolate: Optional[StrictBool] = None
     additional_properties: Dict[str, Any] = {}
-    __properties = ["type", "node_id", "case_spec", "case_objs"]
+    __properties = ["type", "node_id", "case_spec", "case_objs", "isolate"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -141,6 +142,11 @@ class SwitchDTO(BaseModel):
         if self.case_objs is None and "case_objs" in self.__fields_set__:
             _dict['case_objs'] = None
 
+        # set to None if isolate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.isolate is None and "isolate" in self.__fields_set__:
+            _dict['isolate'] = None
+
         return _dict
 
     @classmethod
@@ -155,6 +161,7 @@ class SwitchDTO(BaseModel):
         _obj = SwitchDTO.parse_obj({
             "type": obj.get("type") if obj.get("type") is not None else 'switch',
             "node_id": obj.get("node_id"),
+            "isolate": obj.get("isolate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

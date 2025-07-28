@@ -5,6 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | [optional] [default to 'bool']
 **is_nullable** | **bool** |  | [optional] 
+**description** | **str** |  | [optional] 
+**default_value** | **bool** |  | [optional] 
 ## Example
 
 ```python
@@ -15,7 +17,10 @@ from pydantic.v1 import BaseModel, StrictBool, StrictStr, validator
 type: Optional[StrictStr] = "example_type"
 is_nullable: Optional[StrictBool] = None
 is_nullable:Optional[StrictBool] = None
-dto_bool_instance = DTOBool(type=type, is_nullable=is_nullable)
+description: Optional[StrictStr] = "example_description"
+default_value: Optional[StrictBool] = None
+default_value:Optional[StrictBool] = None
+dto_bool_instance = DTOBool(type=type, is_nullable=is_nullable, description=description, default_value=default_value)
 
 ```
 

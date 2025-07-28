@@ -29,8 +29,9 @@ class DTOArr(BaseModel):
     min_len: StrictInt = Field(...)
     max_len: Optional[StrictInt] = Field(...)
     obj: Obj = Field(...)
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["type", "is_nullable", "min_len", "max_len", "obj"]
+    __properties = ["type", "is_nullable", "min_len", "max_len", "obj", "description"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -145,6 +146,11 @@ class DTOArr(BaseModel):
         if self.max_len is None and "max_len" in self.__fields_set__:
             _dict['max_len'] = None
 
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -161,7 +167,8 @@ class DTOArr(BaseModel):
             "is_nullable": obj.get("is_nullable"),
             "min_len": obj.get("min_len"),
             "max_len": obj.get("max_len"),
-            "obj": Obj.from_dict(obj.get("obj")) if obj.get("obj") is not None else None
+            "obj": Obj.from_dict(obj.get("obj")) if obj.get("obj") is not None else None,
+            "description": obj.get("description")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -11,9 +11,14 @@ from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 
 dto_str_instance = finbourne_candela.models.dto_str.DTOStr(
                         is_nullable = True, 
-                        max_tokens = 56, 
+                        min_length = 56, 
+                        max_length = 56, 
                         regex = '', 
-                        stop = '', )
+                        format = '', 
+                        description = '', 
+                        default_value = '', 
+                        stop = '', 
+                        max_tokens = 56, )
 
 keys_instance = Keys(dto_str_instance)
 

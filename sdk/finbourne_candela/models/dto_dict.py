@@ -18,7 +18,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, validator 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictInt, StrictStr, validator 
 from finbourne_candela.models.keys import Keys
 
 class DTODict(BaseModel):
@@ -27,10 +27,13 @@ class DTODict(BaseModel):
     """
     type:  Optional[StrictStr] = Field(None,alias="type") 
     is_nullable: Optional[StrictBool] = None
-    obj: Obj = Field(...)
+    obj: Obj1 = Field(...)
     keys: Keys = Field(...)
+    min_size: Optional[StrictInt] = None
+    max_size: Optional[StrictInt] = None
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["type", "is_nullable", "obj", "keys"]
+    __properties = ["type", "is_nullable", "obj", "keys", "min_size", "max_size", "description"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -143,6 +146,21 @@ class DTODict(BaseModel):
         if self.is_nullable is None and "is_nullable" in self.__fields_set__:
             _dict['is_nullable'] = None
 
+        # set to None if min_size (nullable) is None
+        # and __fields_set__ contains the field
+        if self.min_size is None and "min_size" in self.__fields_set__:
+            _dict['min_size'] = None
+
+        # set to None if max_size (nullable) is None
+        # and __fields_set__ contains the field
+        if self.max_size is None and "max_size" in self.__fields_set__:
+            _dict['max_size'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -157,8 +175,11 @@ class DTODict(BaseModel):
         _obj = DTODict.parse_obj({
             "type": obj.get("type") if obj.get("type") is not None else 'dictionary',
             "is_nullable": obj.get("is_nullable"),
-            "obj": Obj.from_dict(obj.get("obj")) if obj.get("obj") is not None else None,
-            "keys": Keys.from_dict(obj.get("keys")) if obj.get("keys") is not None else None
+            "obj": Obj1.from_dict(obj.get("obj")) if obj.get("obj") is not None else None,
+            "keys": Keys.from_dict(obj.get("keys")) if obj.get("keys") is not None else None,
+            "min_size": obj.get("min_size"),
+            "max_size": obj.get("max_size"),
+            "description": obj.get("description")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

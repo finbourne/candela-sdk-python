@@ -12,7 +12,10 @@ from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 dto_dict_instance = finbourne_candela.models.dto_dict.DTODict(
                         is_nullable = True, 
                         obj = null, 
-                        keys = null, )
+                        keys = null, 
+                        min_size = 56, 
+                        max_size = 56, 
+                        description = '', )
 
 fields_instance = Fields(dto_dict_instance)
 

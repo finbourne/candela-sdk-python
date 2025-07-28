@@ -25,10 +25,12 @@ class DTOEnum(BaseModel):
     DTOEnum
     """
     type:  Optional[StrictStr] = Field(None,alias="type") 
-    is_nullable: Optional[StrictBool] = None
     options: conlist(StrictStr) = Field(...)
+    is_nullable: Optional[StrictBool] = None
+    description:  Optional[StrictStr] = Field(None,alias="description") 
+    default_value:  Optional[StrictStr] = Field(None,alias="default_value") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["type", "is_nullable", "options"]
+    __properties = ["type", "options", "is_nullable", "description", "default_value"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -135,6 +137,16 @@ class DTOEnum(BaseModel):
         if self.is_nullable is None and "is_nullable" in self.__fields_set__:
             _dict['is_nullable'] = None
 
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if default_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.default_value is None and "default_value" in self.__fields_set__:
+            _dict['default_value'] = None
+
         return _dict
 
     @classmethod
@@ -148,8 +160,10 @@ class DTOEnum(BaseModel):
 
         _obj = DTOEnum.parse_obj({
             "type": obj.get("type") if obj.get("type") is not None else 'enum',
+            "options": obj.get("options"),
             "is_nullable": obj.get("is_nullable"),
-            "options": obj.get("options")
+            "description": obj.get("description"),
+            "default_value": obj.get("default_value")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

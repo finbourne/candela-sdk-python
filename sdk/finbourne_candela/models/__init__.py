@@ -37,6 +37,7 @@ from finbourne_candela.models.keys import Keys
 from finbourne_candela.models.no_op_dto import NoOpDTO
 from finbourne_candela.models.nodes import Nodes
 from finbourne_candela.models.obj import Obj
+from finbourne_candela.models.obj1 import Obj1
 from finbourne_candela.models.object_id import ObjectId
 from finbourne_candela.models.object_metadata import ObjectMetadata
 from finbourne_candela.models.post_app import PostApp
@@ -88,6 +89,7 @@ __all__ = [
     "NoOpDTO",
     "Nodes",
     "Obj",
+    "Obj1",
     "ObjectId",
     "ObjectMetadata",
     "PostApp",

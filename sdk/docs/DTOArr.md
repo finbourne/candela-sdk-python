@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **min_len** | **int** |  | 
 **max_len** | **int** |  | 
 **obj** | [**Obj**](Obj.md) |  | 
+**description** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ min_len: StrictInt = 42
 max_len: Optional[StrictInt] = # Replace with your value
 max_len: StrictInt = 42
 obj: Obj = # Replace with your value
-dto_arr_instance = DTOArr(type=type, is_nullable=is_nullable, min_len=min_len, max_len=max_len, obj=obj)
+description: Optional[StrictStr] = "example_description"
+dto_arr_instance = DTOArr(type=type, is_nullable=is_nullable, min_len=min_len, max_len=max_len, obj=obj, description=description)
 
 ```
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **type** | **str** |  | [optional] [default to 'constant']
 **value** | **str** |  | 
 **is_nullable** | **bool** |  | [optional] 
+**description** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ type: Optional[StrictStr] = "example_type"
 value: StrictStr = "example_value"
 is_nullable: Optional[StrictBool] = None
 is_nullable:Optional[StrictBool] = None
-dto_const_instance = DTOConst(type=type, value=value, is_nullable=is_nullable)
+description: Optional[StrictStr] = "example_description"
+dto_const_instance = DTOConst(type=type, value=value, is_nullable=is_nullable, description=description)
 
 ```
 

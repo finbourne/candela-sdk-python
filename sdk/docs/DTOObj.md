@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | [optional] [default to 'object']
 **is_nullable** | **bool** |  | [optional] 
+**description** | **str** |  | [optional] 
 **fields** | [**Dict[str, Fields]**](Fields.md) |  | 
 ## Example
 
@@ -16,8 +17,9 @@ from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, validator
 type: Optional[StrictStr] = "example_type"
 is_nullable: Optional[StrictBool] = None
 is_nullable:Optional[StrictBool] = None
+description: Optional[StrictStr] = "example_description"
 fields: Optional[Any] = # Replace with your value
-dto_obj_instance = DTOObj(type=type, is_nullable=is_nullable, fields=fields)
+dto_obj_instance = DTOObj(type=type, is_nullable=is_nullable, description=description, fields=fields)
 
 ```
 

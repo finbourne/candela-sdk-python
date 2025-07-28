@@ -27,8 +27,9 @@ class DTOConst(BaseModel):
     type:  Optional[StrictStr] = Field(None,alias="type") 
     value:  StrictStr = Field(...,alias="value") 
     is_nullable: Optional[StrictBool] = None
+    description:  Optional[StrictStr] = Field(None,alias="description") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["type", "value", "is_nullable"]
+    __properties = ["type", "value", "is_nullable", "description"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -135,6 +136,11 @@ class DTOConst(BaseModel):
         if self.is_nullable is None and "is_nullable" in self.__fields_set__:
             _dict['is_nullable'] = None
 
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -149,7 +155,8 @@ class DTOConst(BaseModel):
         _obj = DTOConst.parse_obj({
             "type": obj.get("type") if obj.get("type") is not None else 'constant',
             "value": obj.get("value"),
-            "is_nullable": obj.get("is_nullable")
+            "is_nullable": obj.get("is_nullable"),
+            "description": obj.get("description")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
