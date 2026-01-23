@@ -1,21 +1,21 @@
 [tool.poetry]
 name = "finbourne-candela-sdk"
-version = "0.1.173"
-description = "FINBOURNE Candela Platform Web API"
-authors = ["OpenAPI Generator Community <team@openapitools.org>"]
+version = "0.3.1"
+description = "FINBOURNE Candela API"
+authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/finbourne/candela-sdk-python"
-keywords = ["OpenAPI", "OpenAPI-Generator", "FINBOURNE Candela Platform Web API", "finbourne-candela-sdk"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "FINBOURNE Candela API", "finbourne-candela-sdk"]
 packages = [
     {include = "finbourne_candela"}
 ]
 include = ["finbourne_candela/**/*"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 
-urllib3 = "^1.25.3"
+urllib3 = "^2.6.0"
 python-dateutil = "^2.8.2"
 requests = "^2"
 aiohttp = "^3.8.4"
@@ -30,8 +30,8 @@ black = "^23.9.1"
 xeger = "^0.4"
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pylint.'MESSAGES CONTROL']
 extension-pkg-whitelist = "pydantic"
