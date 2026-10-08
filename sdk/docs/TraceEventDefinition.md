@@ -5,12 +5,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **trace_id** | **str** |  | [optional] 
 **trace_event_id** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
+**created_at** | **datetime** | When the event occurred, from the clock of the code that observed it — not when the row was written. Ordering by this is what makes a replayed conversation match the order the user saw live. Do not equate it with the identically-named field on an insights trace log, which is stamped by the log aggregator on receipt. | [optional] 
 **user_id** | **str** |  | [optional] 
 **origin** | **str** |  | [optional] 
 **content** | **str** |  | [optional] 
 **agent_code** | **str** |  | [optional] 
 **agent_version** | **int** |  | [optional] 
+**event_type** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ content: Optional[StrictStr] = "example_content"
 agent_code: Optional[StrictStr] = "example_agent_code"
 agent_version: Optional[StrictInt] = # Replace with your value
 agent_version: Optional[StrictInt] = None
-trace_event_definition_instance = TraceEventDefinition(trace_id=trace_id, trace_event_id=trace_event_id, created_at=created_at, user_id=user_id, origin=origin, content=content, agent_code=agent_code, agent_version=agent_version)
+event_type: Optional[StrictStr] = "example_event_type"
+trace_event_definition_instance = TraceEventDefinition(trace_id=trace_id, trace_event_id=trace_event_id, created_at=created_at, user_id=user_id, origin=origin, content=content, agent_code=agent_code, agent_version=agent_version, event_type=event_type)
 
 ```
 

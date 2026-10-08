@@ -38,7 +38,10 @@ class AgentDefinition(BaseModel):
     is_enabled: StrictBool = Field(description="Whether the agent is enabled", alias="isEnabled")
     tool_names: List[StrictStr] = Field(description="The list of MCP tools that this agent is allowed to use", alias="toolNames")
     description:  StrictStr = Field(...,alias="description", description="A description of the agent") 
-    __properties = ["scope", "code", "version", "name", "prompt", "examplePrompts", "createdBy", "createdAt", "isEnabled", "toolNames", "description"]
+    overrides_system_agent: Optional[StrictBool] = Field(default=None, description="Whether this agent intentionally overrides a system agent with the same name", alias="overridesSystemAgent")
+    is_active: Optional[StrictBool] = Field(default=None, description="Whether this agent is active. False when a custom agent collides with a system agent without an approved override.", alias="isActive")
+    collision_status:  Optional[StrictStr] = Field(None,alias="collisionStatus", description="The collision status relative to system agents. Null if no collision, \"overriding_system_agent\" if actively overriding, \"superseded_by_system_agent\" if a system agent takes precedence.") 
+    __properties = ["scope", "code", "version", "name", "prompt", "examplePrompts", "createdBy", "createdAt", "isEnabled", "toolNames", "description", "overridesSystemAgent", "isActive", "collisionStatus"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,6 +90,11 @@ class AgentDefinition(BaseModel):
         if self.example_prompts is None and "example_prompts" in self.__fields_set__:
             _dict['examplePrompts'] = None
 
+        # set to None if collision_status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.collision_status is None and "collision_status" in self.__fields_set__:
+            _dict['collisionStatus'] = None
+
         return _dict
 
     @classmethod
@@ -109,7 +117,10 @@ class AgentDefinition(BaseModel):
             "created_at": obj.get("createdAt"),
             "is_enabled": obj.get("isEnabled"),
             "tool_names": obj.get("toolNames"),
-            "description": obj.get("description")
+            "description": obj.get("description"),
+            "overrides_system_agent": obj.get("overridesSystemAgent"),
+            "is_active": obj.get("isActive"),
+            "collision_status": obj.get("collisionStatus")
         })
         return _obj
 

@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **is_enabled** | **bool** | Whether the agent is enabled | 
 **tool_names** | **List[str]** | The list of MCP tools that this agent is allowed to use | 
 **description** | **str** | A description of the agent | 
+**overrides_system_agent** | **bool** | Whether this agent intentionally overrides a system agent with the same name | [optional] 
+**is_active** | **bool** | Whether this agent is active. False when a custom agent collides with a system agent without an approved override. | [optional] 
+**collision_status** | **str** | The collision status relative to system agents. Null if no collision, \&quot;overriding_system_agent\&quot; if actively overriding, \&quot;superseded_by_system_agent\&quot; if a system agent takes precedence. | [optional] 
 ## Example
 
 ```python
@@ -37,7 +40,12 @@ is_enabled: StrictBool = # Replace with your value
 is_enabled:StrictBool = True
 tool_names: List[StrictStr] = # Replace with your value
 description: StrictStr = "example_description"
-agent_definition_instance = AgentDefinition(scope=scope, code=code, version=version, name=name, prompt=prompt, example_prompts=example_prompts, created_by=created_by, created_at=created_at, is_enabled=is_enabled, tool_names=tool_names, description=description)
+overrides_system_agent: Optional[StrictBool] = # Replace with your value
+overrides_system_agent:Optional[StrictBool] = None
+is_active: Optional[StrictBool] = # Replace with your value
+is_active:Optional[StrictBool] = None
+collision_status: Optional[StrictStr] = "example_collision_status"
+agent_definition_instance = AgentDefinition(scope=scope, code=code, version=version, name=name, prompt=prompt, example_prompts=example_prompts, created_by=created_by, created_at=created_at, is_enabled=is_enabled, tool_names=tool_names, description=description, overrides_system_agent=overrides_system_agent, is_active=is_active, collision_status=collision_status)
 
 ```
 

@@ -10,6 +10,8 @@ Class | Method | HTTP request | Description
 *AgentsApi* | [**get_agent**](docs/AgentsApi.md#get_agent) | **GET** /api/agents/{scope}/{code} | [EARLY ACCESS] GetAgent: Get an agent
 *AgentsApi* | [**list_agents**](docs/AgentsApi.md#list_agents) | **GET** /api/agents/{scope} | [EARLY ACCESS] ListAgents: List all system agents and agents in the specified scope
 *ApplicationMetadataApi* | [**list_access_controlled_resources**](docs/ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | [EARLY ACCESS] ListAccessControlledResources: Get resources available for access control
+*ApplicationMetadataApi* | [**list_api_endpoints**](docs/ApplicationMetadataApi.md#list_api_endpoints) | **GET** /api/metadata/endpoints | ListApiEndpoints: Get the API endpoints available
+*HeadlessRunsApi* | [**start_headless_run**](docs/HeadlessRunsApi.md#start_headless_run) | **POST** /api/headless/runs | [EARLY ACCESS] StartHeadlessRun: 
 *TracesApi* | [**delete_trace**](docs/TracesApi.md#delete_trace) | **DELETE** /api/traces/{scope}/{traceId} | [EARLY ACCESS] DeleteTrace: 
 *TracesApi* | [**get_trace**](docs/TracesApi.md#get_trace) | **GET** /api/traces/{scope}/{traceId} | [EARLY ACCESS] GetTrace: 
 *TracesApi* | [**get_trace_events**](docs/TracesApi.md#get_trace_events) | **GET** /api/traces/events/{scope}/{traceId} | [EARLY ACCESS] GetTraceEvents: 
@@ -24,6 +26,8 @@ Class | Method | HTTP request | Description
  - [ActionId](docs/ActionId.md)
  - [AddAgentRequest](docs/AddAgentRequest.md)
  - [AgentDefinition](docs/AgentDefinition.md)
+ - [ApiEndpoint](docs/ApiEndpoint.md)
+ - [HeadlessRunResponse](docs/HeadlessRunResponse.md)
  - [IdSelectorDefinition](docs/IdSelectorDefinition.md)
  - [IdentifierPartSchema](docs/IdentifierPartSchema.md)
  - [Link](docs/Link.md)
@@ -33,6 +37,8 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfTraceDefinition](docs/PagedResourceListOfTraceDefinition.md)
  - [PagedResourceListOfTraceEventDefinition](docs/PagedResourceListOfTraceEventDefinition.md)
  - [ResourceListOfAccessControlledResource](docs/ResourceListOfAccessControlledResource.md)
+ - [ServiceApiEndpoints](docs/ServiceApiEndpoints.md)
+ - [StartHeadlessRunRequest](docs/StartHeadlessRunRequest.md)
  - [TraceDefinition](docs/TraceDefinition.md)
  - [TraceEventDefinition](docs/TraceEventDefinition.md)
 

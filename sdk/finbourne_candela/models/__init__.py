@@ -19,6 +19,8 @@ from finbourne_candela.models.access_controlled_resource import AccessControlled
 from finbourne_candela.models.action_id import ActionId
 from finbourne_candela.models.add_agent_request import AddAgentRequest
 from finbourne_candela.models.agent_definition import AgentDefinition
+from finbourne_candela.models.api_endpoint import ApiEndpoint
+from finbourne_candela.models.headless_run_response import HeadlessRunResponse
 from finbourne_candela.models.id_selector_definition import IdSelectorDefinition
 from finbourne_candela.models.identifier_part_schema import IdentifierPartSchema
 from finbourne_candela.models.link import Link
@@ -28,6 +30,8 @@ from finbourne_candela.models.paged_resource_list_of_agent_definition import Pag
 from finbourne_candela.models.paged_resource_list_of_trace_definition import PagedResourceListOfTraceDefinition
 from finbourne_candela.models.paged_resource_list_of_trace_event_definition import PagedResourceListOfTraceEventDefinition
 from finbourne_candela.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
+from finbourne_candela.models.service_api_endpoints import ServiceApiEndpoints
+from finbourne_candela.models.start_headless_run_request import StartHeadlessRunRequest
 from finbourne_candela.models.trace_definition import TraceDefinition
 from finbourne_candela.models.trace_event_definition import TraceEventDefinition
 
@@ -38,6 +42,8 @@ __all__ = [
     "ActionId",
     "AddAgentRequest",
     "AgentDefinition",
+    "ApiEndpoint",
+    "HeadlessRunResponse",
     "IdSelectorDefinition",
     "IdentifierPartSchema",
     "Link",
@@ -47,6 +53,8 @@ __all__ = [
     "PagedResourceListOfTraceDefinition",
     "PagedResourceListOfTraceEventDefinition",
     "ResourceListOfAccessControlledResource",
+    "ServiceApiEndpoints",
+    "StartHeadlessRunRequest",
     "TraceDefinition",
     "TraceEventDefinition"
 ]

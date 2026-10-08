@@ -29,13 +29,14 @@ class TraceEventDefinition(BaseModel):
     """
     trace_id:  Optional[StrictStr] = Field(None,alias="traceId") 
     trace_event_id:  Optional[StrictStr] = Field(None,alias="traceEventId") 
-    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
+    created_at: Optional[datetime] = Field(default=None, description="When the event occurred, from the clock of the code that observed it — not when the row was written. Ordering by this is what makes a replayed conversation match the order the user saw live. Do not equate it with the identically-named field on an insights trace log, which is stamped by the log aggregator on receipt.", alias="createdAt")
     user_id:  Optional[StrictStr] = Field(None,alias="userId") 
     origin:  Optional[StrictStr] = Field(None,alias="origin") 
     content:  Optional[StrictStr] = Field(None,alias="content") 
     agent_code:  Optional[StrictStr] = Field(None,alias="agentCode") 
     agent_version: Optional[StrictInt] = Field(default=None, alias="agentVersion")
-    __properties = ["traceId", "traceEventId", "createdAt", "userId", "origin", "content", "agentCode", "agentVersion"]
+    event_type:  Optional[StrictStr] = Field(None,alias="eventType") 
+    __properties = ["traceId", "traceEventId", "createdAt", "userId", "origin", "content", "agentCode", "agentVersion", "eventType"]
 
     class Config:
         """Pydantic configuration"""
@@ -99,6 +100,11 @@ class TraceEventDefinition(BaseModel):
         if self.agent_code is None and "agent_code" in self.__fields_set__:
             _dict['agentCode'] = None
 
+        # set to None if event_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.event_type is None and "event_type" in self.__fields_set__:
+            _dict['eventType'] = None
+
         return _dict
 
     @classmethod
@@ -118,7 +124,8 @@ class TraceEventDefinition(BaseModel):
             "origin": obj.get("origin"),
             "content": obj.get("content"),
             "agent_code": obj.get("agentCode"),
-            "agent_version": obj.get("agentVersion")
+            "agent_version": obj.get("agentVersion"),
+            "event_type": obj.get("eventType")
         })
         return _obj
 

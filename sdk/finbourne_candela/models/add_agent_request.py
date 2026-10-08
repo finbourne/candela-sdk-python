@@ -30,7 +30,7 @@ class AddAgentRequest(BaseModel):
     code:  Optional[StrictStr] = Field(None,alias="code", description="The unique code for the agent") 
     name:  StrictStr = Field(...,alias="name", description="The name of the agent as it is referred to by Candela. This must be unique to avoid clashes.") 
     prompt:  StrictStr = Field(...,alias="prompt", description="The agent's prompt") 
-    example_prompts: Optional[List[StrictStr]] = Field(default=None, description="Example prompts to offer the uer", alias="examplePrompts")
+    example_prompts: Optional[List[StrictStr]] = Field(default=None, description="Example prompts to offer the user", alias="examplePrompts")
     is_enabled: StrictBool = Field(description="Whether the agent is enabled", alias="isEnabled")
     tool_names: List[StrictStr] = Field(description="The list of MCP tools that this agent is allowed to use", alias="toolNames")
     description:  StrictStr = Field(...,alias="description", description="A description of the agent") 

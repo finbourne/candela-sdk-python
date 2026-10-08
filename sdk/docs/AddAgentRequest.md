@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **code** | **str** | The unique code for the agent | [optional] 
 **name** | **str** | The name of the agent as it is referred to by Candela. This must be unique to avoid clashes. | 
 **prompt** | **str** | The agent&#39;s prompt | 
-**example_prompts** | **List[str]** | Example prompts to offer the uer | [optional] 
+**example_prompts** | **List[str]** | Example prompts to offer the user | [optional] 
 **is_enabled** | **bool** | Whether the agent is enabled | 
 **tool_names** | **List[str]** | The list of MCP tools that this agent is allowed to use | 
 **description** | **str** | A description of the agent | 
