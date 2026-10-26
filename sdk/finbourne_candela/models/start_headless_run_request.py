@@ -25,13 +25,14 @@ from datetime import datetime
 
 class StartHeadlessRunRequest(BaseModel):
     """
-    StartHeadlessRunRequest
+    A run for a Drive file (fileId, filePath and fileName together), or for a Workflow task (taskId alone).  # noqa: E501
     """
     agent:  StrictStr = Field(...,alias="agent") 
-    file_id:  StrictStr = Field(...,alias="fileId") 
-    file_path:  StrictStr = Field(...,alias="filePath") 
-    file_name:  StrictStr = Field(...,alias="fileName") 
-    __properties = ["agent", "fileId", "filePath", "fileName"]
+    file_id:  Optional[StrictStr] = Field(None,alias="fileId") 
+    file_path:  Optional[StrictStr] = Field(None,alias="filePath") 
+    file_name:  Optional[StrictStr] = Field(None,alias="fileName") 
+    task_id:  Optional[StrictStr] = Field(None,alias="taskId") 
+    __properties = ["agent", "fileId", "filePath", "fileName", "taskId"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +66,26 @@ class StartHeadlessRunRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if file_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.file_id is None and "file_id" in self.__fields_set__:
+            _dict['fileId'] = None
+
+        # set to None if file_path (nullable) is None
+        # and __fields_set__ contains the field
+        if self.file_path is None and "file_path" in self.__fields_set__:
+            _dict['filePath'] = None
+
+        # set to None if file_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.file_name is None and "file_name" in self.__fields_set__:
+            _dict['fileName'] = None
+
+        # set to None if task_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.task_id is None and "task_id" in self.__fields_set__:
+            _dict['taskId'] = None
+
         return _dict
 
     @classmethod
@@ -80,7 +101,8 @@ class StartHeadlessRunRequest(BaseModel):
             "agent": obj.get("agent"),
             "file_id": obj.get("fileId"),
             "file_path": obj.get("filePath"),
-            "file_name": obj.get("fileName")
+            "file_name": obj.get("fileName"),
+            "task_id": obj.get("taskId")
         })
         return _obj
 
